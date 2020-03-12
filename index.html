@@ -4,25 +4,9 @@
     <meta charset="UTF-8">
     <title>Coarse Grid</title>
     <link rel="stylesheet" type="text/css" href="formeditor.css">
+    <script src="formeditor.js"></script>
 </head>
 <body>
-<!-- Include Scala.js compiled code -->
-<!-- <script type="text/javascript" src="./target/scala-2.13/scala-js-tutorial-fastopt.js"></script> -->
-<script>
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-    }
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
-    }
-</script>
 
 <div id="grid">
     <div class="hor">
