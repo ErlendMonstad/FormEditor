@@ -4,10 +4,14 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+    //ev.dataTransfer.setData("text",ev.target.className)
 }
 
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data).cloneNode(true));
+    var newelement = document.getElementById(data).cloneNode(true);
+    //newelement.classList.add("copy");
+    ev.target.appendChild(newelement);
 }
+
