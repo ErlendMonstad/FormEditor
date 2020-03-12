@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coarse Grid</title>
+</head>
+<body>
+<!-- Include Scala.js compiled code -->
+<!-- <script type="text/javascript" src="./target/scala-2.13/scala-js-tutorial-fastopt.js"></script> -->
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+
+<style>
+    #grid {
+        width: 800px;
+        height: 800px;
+
+        border: 1px solid #aaaaaa;
+    }
+
+    .vert {
+
+
+        width: 100%;
+        height: 50%;
+    }
+    .hor {
+        width: 50%;
+        height: 100%;
+
+    }
+
+    #toolbox{
+        width: 500px;
+        height: 100px;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
+    }
+
+    .tool {
+        width: 100px;
+        height: 100px;
+        padding: 0px;
+        border: 1px solid #aaaaaa;
+    }
+
+    div {
+        border: 1px solid #aaaaaa;
+    }
+</style>
+
+<div id="grid">
+    <div class="hor">
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+    <div class="hor">
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+</div>
+</div>>
+
+<div id="toolbox" ondragover="allowDrop(event)">
+    <input id="button_tool" type="button" value="CLICK"  draggable="true" ondragstart="drag(event)" >
+    <input id="text_tool" type="text" value="CLICK"  draggable="true" ondragstart="drag(event)" >
+</div>
+
+</body>
+</html>
