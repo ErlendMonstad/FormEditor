@@ -4,25 +4,15 @@
     <meta charset="UTF-8">
     <title>Coarse Grid</title>
     <link rel="stylesheet" type="text/css" href="formeditor.css">
+    <script src="formeditor.js"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+    <script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
 </head>
 <body>
-<!-- Include Scala.js compiled code -->
-<!-- <script type="text/javascript" src="./target/scala-2.13/scala-js-tutorial-fastopt.js"></script> -->
-<script>
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-    }
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
-    }
-</script>
 
 <div id="grid">
     <div class="vert" ondrop="drop(event)" ondragover="allowDrop(event)">1</div>
@@ -38,8 +28,8 @@
 </div>
 
 <div id="toolbox" ondragover="allowDrop(event)">
-    <input id="button_tool" type="button" value="CLICK"  draggable="true" ondragstart="drag(event)" >
-    <input id="text_tool" type="text" value="CLICK"  draggable="true" ondragstart="drag(event)" >
+    <input id="button_tool" type="button" value="CLICK" class="tool" draggable="true" ondragstart="drag(event)" >
+    <input id="text_tool" type="text" value="CLICK"  class="tool" draggable="true" ondragstart="drag(event)" >
 </div>
 
 </body>
