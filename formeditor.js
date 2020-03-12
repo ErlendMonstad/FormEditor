@@ -9,9 +9,23 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var newelement = document.getElementById(data).cloneNode(true);
-    //newelement.classList.add("copy");
-    ev.target.appendChild(newelement);
+    let data = ev.dataTransfer.getData("text");
+    let el = document.getElementById(data);
+    if(el.classList.contains("tool")){
+        let newelement = el.cloneNode(true);
+        //newelement.classList.add("copy");
+        newelement.id = newId();
+        newelement.classList.remove("tool");
+        ev.target.appendChild(newelement);
+    }else{
+        ev.target.appendChild(document.getElementById(data));
+    }
+
+
 }
 
+let idcounter = 0;
+
+function newId(){
+    return "id" + idcounter++;
+}
