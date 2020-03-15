@@ -1,12 +1,13 @@
 #grid {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(12, 8.33%);
+    grid-template-rows: repeat(20, 2em);
     border: 1px solid #aaaaaa;
 }
 
-.vert {
+.cell {
     border: 1px solid #aaaaaa;
-    padding: 20px;
+
 }
 .hor {
     height: 30%;
