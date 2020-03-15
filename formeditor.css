@@ -6,7 +6,6 @@
 }
 
 .cell {
-    border: 1px solid #aaaaaa;
 
 }
 .hor {
@@ -16,10 +15,21 @@
 }
 
 #toolbox {
+    display: grid;
     width: auto;
     height: 100px;
     padding: 0px;
     border: 1px solid #aaaaaa;
+}
+
+#toolbox .tool {
+    width:  80px;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
 }
 
 div {
