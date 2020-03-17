@@ -15,6 +15,7 @@ function drop(ev) {
         let x = el.getAttribute("data-x");
         let y = el.getAttribute("data-y");
 
+
     }
 
     if(el.classList.contains("tool")){
@@ -34,9 +35,14 @@ function drop(ev) {
 
 function populateGrid(){
     let div = document.createElement('div');
-    div.outerHTML = '<div class="cell" ondrop="drop(event)" ondragover="allowDrop(event)" />';
+    div.classList.add("cell");
+
+
     for(let i = 0; i < 12 * 20; i++){
         let cell = div.cloneNode(true);
+        cell.ondrop = (() => drop(event));
+        cell.ondragover = (() => allowDrop(event));
+        cell.id = newId();
         let x = document.createAttribute("data-x");
         let y = document.createAttribute("data-y");
         x.value = i % 12;
@@ -45,7 +51,11 @@ function populateGrid(){
         cell.attributes.setNamedItem(y);
         document.getElementById("grid").appendChild(cell);
     }
+}
 
+function setSize(id){
+    let element = document.getElementById(id);
+    
 
 }
 
@@ -56,3 +66,10 @@ function newId(){
 }
 
 populateGrid();
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
+})

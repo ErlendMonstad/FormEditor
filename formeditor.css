@@ -5,6 +5,19 @@
     border: 1px solid #aaaaaa;
 }
 
+#propertywindow {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    border: 1px solid #aaaaaa;
+}
+
+#bottommenu {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    border: 1px solid #aaaaaa;
+}
+
+
 .cell {
 
 }
