@@ -9,11 +9,12 @@
     display: grid;
     grid-template-columns: repeat(2, 50%);
     border: 1px solid #aaaaaa;
+    grid-column-start: 3;
 }
 
 #bottommenu {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: auto 10% auto;
     border: 1px solid #aaaaaa;
 }
 
