@@ -14,8 +14,6 @@ function drop(ev) {
     if(el.classList.contains("cell")){
         let x = el.getAttribute("data-x");
         let y = el.getAttribute("data-y");
-
-
     }
 
     if(el.classList.contains("tool")){
@@ -45,10 +43,13 @@ function populateGrid(){
         cell.id = newId();
         let x = document.createAttribute("data-x");
         let y = document.createAttribute("data-y");
+        let ondragover = document.createAttribute("ondragover");
         x.value = i % 12;
         y.value = (i - x.value) / 12;
+        ondragover.value = 'ondragover="allowDrop(event)"';
         cell.attributes.setNamedItem(x);
         cell.attributes.setNamedItem(y);
+        cell.attributes.setNamedItem(ondragover);
         document.getElementById("grid").appendChild(cell);
     }
 }
@@ -91,9 +92,9 @@ Vue.component('grid-element', {
             gridarea: `grid-area: ${this.item.y} / ${this.item.x} / span ${this.item.h} / span ${this.item.w};`,
         }
     },
-    template:   '<p v-if=\'item.type === "label"\' :style="gridarea">{{item.value}}</p>' +
-                '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea"/>' +
-                '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea"/>'
+    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" draggable="true" ondragstart="drag(event)">{{item.value}}</p>' +
+                '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea" draggable="true" ondragstart="drag(event)"/>' +
+                '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" draggable="true" ondragstart="drag(event)"/>'
 });
 
 var app = new Vue({
