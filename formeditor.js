@@ -105,9 +105,18 @@ var app = new Vue({
                 x: 2,
                 y: 2,
                 w: 2,
-                h: 2,
-                value: "HELLO WORLD",
-                type: "button",
+                h: 1,
+                value: "Navn",
+                type: "label",
+            },
+            {
+                id: 2,
+                x: 4,
+                y: 2,
+                w: 2,
+                h: 1,
+                value: "navn-input",
+                type: "text",
             }
         ]
     }

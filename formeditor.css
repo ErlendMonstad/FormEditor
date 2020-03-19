@@ -42,7 +42,10 @@
 
 #grid input {
     font-size: 12px;
-    grid-column-start: 2;
+}
+
+#grid p {
+    font-size: 12px;
 }
 
 input {
