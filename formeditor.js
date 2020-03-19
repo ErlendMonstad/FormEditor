@@ -2,30 +2,23 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+function drag(ev,id) {
+    ev.dataTransfer.setData("text", id);
     //ev.dataTransfer.setData("text",ev.target.className)
 }
 
 function drop(ev) {
     ev.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    let el = document.getElementById(data);
-    if(el.classList.contains("cell")){
-        let x = el.getAttribute("data-x");
-        let y = el.getAttribute("data-y");
-    }
+    let id = ev.dataTransfer.getData("text");
+    let x = ev.target.attributes.getNamedItem("data-x");
+    let y = ev.target.attributes.getNamedItem("data-y");
 
-    if(el.classList.contains("tool")){
-        let newelement = el.cloneNode(true);
-        //newelement.classList.add("copy");
-        newelement.id = newId();
-        newelement.classList.remove("tool");
-        ev.target.appendChild(newelement);
-    }else{
+    let item = app.gridlist.find(item => item.id == id);
+    item.x = x;
+    item.y = y;
 
-        document.getElementById("grid").appendChild(document.getElementById(data));
-    }
+
+
 
 
 }
@@ -44,12 +37,15 @@ function populateGrid(){
         let x = document.createAttribute("data-x");
         let y = document.createAttribute("data-y");
         let ondragover = document.createAttribute("ondragover");
+        let ondrop = document.createAttribute("ondrop");
         x.value = i % 12;
         y.value = (i - x.value) / 12;
-        ondragover.value = 'ondragover="allowDrop(event)"';
+        ondragover.value = 'allowDrop(event)';
+        ondrop.value = 'drop(event)';
         cell.attributes.setNamedItem(x);
         cell.attributes.setNamedItem(y);
         cell.attributes.setNamedItem(ondragover);
+        cell.attributes.setNamedItem(ondrop);
         document.getElementById("grid").appendChild(cell);
     }
 }
@@ -90,11 +86,12 @@ Vue.component('grid-element', {
     data : function() {
         return {
             gridarea: `grid-area: ${this.item.y} / ${this.item.x} / span ${this.item.h} / span ${this.item.w};`,
+            ondragstart: `drag(event, ${this.item.id})`
         }
     },
-    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" draggable="true" ondragstart="drag(event)">{{item.value}}</p>' +
-                '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea" draggable="true" ondragstart="drag(event)"/>' +
-                '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" draggable="true" ondragstart="drag(event)"/>'
+    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" draggable="true" :ondragstart="ondragstart">{{item.value}}</p>' +
+                '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea" draggable="true" :ondragstart="ondragstart"/>' +
+                '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" draggable="true" :ondragstart="ondragstart"/>'
 });
 
 var app = new Vue({

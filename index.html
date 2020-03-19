@@ -17,10 +17,10 @@
 <div id="app">
 <div id="grid">
     <grid-element
-            v-for="(item, index) in gridlist"
+            v-for="(item) in gridlist"
             v-bind:item="item"
-            v-bind:index="index"
             v-bind:key="item.id"
+            @dragstart='drag($event, item)'
     ></grid-element>
 </div>
 </div>
