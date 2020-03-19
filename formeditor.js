@@ -10,13 +10,32 @@ function drag(ev,id) {
 function drop(ev) {
     ev.preventDefault();
     let id = ev.dataTransfer.getData("text");
-    let x = ev.target.attributes.getNamedItem("data-x");
-    let y = ev.target.attributes.getNamedItem("data-y");
+    let x = ev.target.attributes.getNamedItem("data-x").value;
+    let y = ev.target.attributes.getNamedItem("data-y").value;
 
     let item = app.gridlist.find(item => item.id == id);
-    item.x = x.value;
-    item.y = y.value;
-    console.log(x.value,y.value);
+
+    if(ev.shiftKey){
+        if(x < item.x){
+            let difference = item.x - x;
+            item.x = x;
+            item.w += difference;
+            console.log(item.x,item.w);
+        }else{
+            item.w = x - item.x + 1;
+            console.log(item.x,item.w);
+        }
+        if(y < item.y){
+            let difference = item.y - y;
+            item.y = y;
+            item.h += difference;
+        }else{
+            item.h = y - item.y + 1;
+        }
+    }else {
+        item.x = x;
+        item.y = y;
+    }
 }
 
 
