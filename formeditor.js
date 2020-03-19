@@ -14,20 +14,15 @@ function drop(ev) {
     let y = ev.target.attributes.getNamedItem("data-y");
 
     let item = app.gridlist.find(item => item.id == id);
-    item.x = x;
-    item.y = y;
-
-
-
-
-
+    item.x = x.value;
+    item.y = y.value;
+    console.log(x.value,y.value);
 }
 
 
 function populateGrid(){
     let div = document.createElement('div');
     div.classList.add("cell");
-
 
     for(let i = 0; i < 12 * 20; i++){
         let cell = div.cloneNode(true);
@@ -38,15 +33,25 @@ function populateGrid(){
         let y = document.createAttribute("data-y");
         let ondragover = document.createAttribute("ondragover");
         let ondrop = document.createAttribute("ondrop");
-        x.value = i % 12;
-        y.value = (i - x.value) / 12;
+        let style = document.createAttribute("style");
+
+
+        x.value = (i % 12 + 1);
+        y.value = 1 + (i - (x.value - 1)) / 12;
+        cell.style.gridColumnStart = x.value;
+        cell.style.gridRowStart = y.value;
+
+
+
         ondragover.value = 'allowDrop(event)';
         ondrop.value = 'drop(event)';
+
         cell.attributes.setNamedItem(x);
         cell.attributes.setNamedItem(y);
         cell.attributes.setNamedItem(ondragover);
         cell.attributes.setNamedItem(ondrop);
-        document.getElementById("grid").appendChild(cell);
+
+        document.getElementById("grid").prepend(cell);
     }
 }
 
@@ -83,12 +88,17 @@ Vue.component('label-element', {
 
 Vue.component('grid-element', {
     props: ['item'],
-    data : function() {
+    data: function () {
         return {
-            gridarea: `grid-area: ${this.item.y} / ${this.item.x} / span ${this.item.h} / span ${this.item.w};`,
             ondragstart: `drag(event, ${this.item.id})`
         }
     },
+    computed: {
+        gridarea: function () {
+            return `grid-area: ${this.item.y} / ${this.item.x} / span ${this.item.h} / span ${this.item.w};`;
+        }
+        },
+
     template:   '<p v-if=\'item.type === "label"\' :style="gridarea" draggable="true" :ondragstart="ondragstart">{{item.value}}</p>' +
                 '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea" draggable="true" :ondragstart="ondragstart"/>' +
                 '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" draggable="true" :ondragstart="ondragstart"/>'
