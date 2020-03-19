@@ -65,11 +65,46 @@ function newId(){
     return "id" + idcounter++;
 }
 
-populateGrid();
+//populateGrid();
+
+/*
+Vue.component('text-element', {
+    props: ['item'],
+    template: '<input type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
+});
+
+Vue.component('button-element', {
+    props: ['item'],
+    template: '<input type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
+});
+
+Vue.component('label-element', {
+    props: ['item'],
+    template: '<p style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
+});
+*/
+
+Vue.component('grid-element', {
+    props: ['item'],
+    template:   '<p v-if=\'item.type === "label"\' style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>' +
+                '<input v-if=\'item.type === "textinput"\' type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>' +
+                '<input type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
+});
 
 var app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello Vue!'
+        gridlist: [
+            {
+                id: 1,
+                x: 1,
+                y: 1,
+                w: 2,
+                h: 2,
+                type: "text",
+            }
+        ]
     }
-})
+});
+
+
