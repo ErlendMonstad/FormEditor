@@ -65,7 +65,7 @@ function newId(){
     return "id" + idcounter++;
 }
 
-//populateGrid();
+populateGrid();
 
 /*
 Vue.component('text-element', {
@@ -86,9 +86,14 @@ Vue.component('label-element', {
 
 Vue.component('grid-element', {
     props: ['item'],
-    template:   '<p v-if=\'item.type === "label"\' style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>' +
-                '<input v-if=\'item.type === "textinput"\' type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>' +
-                '<input type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
+    data : function() {
+        return {
+            gridarea: "grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}}"
+        }
+    },
+    template:   '<p v-if=\'item.type === "label"\' :style="data.gridarea"/>' +
+                '<input v-else-if=\'item.type === "textinput"\' type="text" :style="data.gridarea"/>' +
+                '<input v-else-if=\'item.type === "buttoninput"\' type="button" :style="data.gridarea"/>'
 });
 
 var app = new Vue({
