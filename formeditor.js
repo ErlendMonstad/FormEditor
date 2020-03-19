@@ -88,12 +88,12 @@ Vue.component('grid-element', {
     props: ['item'],
     data : function() {
         return {
-            gridarea: "grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}}"
+            gridarea: 'grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}}'
         }
     },
-    template:   '<p v-if=\'item.type === "label"\' :style="data.gridarea"/>' +
-                '<input v-else-if=\'item.type === "textinput"\' type="text" :style="data.gridarea"/>' +
-                '<input v-else-if=\'item.type === "buttoninput"\' type="button" :style="data.gridarea"/>'
+    template:   '<p v-if=\'item.type === "label"\' :style="gridarea">{{item.value}}</p>' +
+                '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea"/>' +
+                '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea"/>'
 });
 
 var app = new Vue({
