@@ -88,7 +88,7 @@ Vue.component('grid-element', {
     props: ['item'],
     data : function() {
         return {
-            gridarea: 'grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}}'
+            gridarea: `grid-area: ${this.item.y} / ${this.item.x} / span ${this.item.h} / span ${this.item.w};`,
         }
     },
     template:   '<p v-if=\'item.type === "label"\' :style="gridarea">{{item.value}}</p>' +
@@ -102,11 +102,12 @@ var app = new Vue({
         gridlist: [
             {
                 id: 1,
-                x: 1,
-                y: 1,
+                x: 2,
+                y: 2,
                 w: 2,
                 h: 2,
-                type: "text",
+                value: "HELLO WORLD",
+                type: "button",
             }
         ]
     }
