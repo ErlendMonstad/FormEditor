@@ -2,48 +2,78 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
+// TODO: Add pointer change for resizing
+
 function drag(ev,id) {
-    ev.dataTransfer.setData("text", id);
+    let item = app.gridlist.find(item => item.id == id);
+    let coloums = 12; // TODO: Get these numbers from the actual source
+    let rows = 20;
+    let resizemargin = 6;
+
+    let domrect = document.getElementById("grid").getBoundingClientRect();
+
+    let gridx = (ev.pageX - domrect.x);
+    let gridy = (ev.pageY - domrect.y);
+
+    let columnwidth = (domrect.width / coloums);
+    let rowheight = (domrect.height / rows);
+
+    let x = Math.floor((ev.pageX - domrect.x) / columnwidth) - item.x;
+    let y = Math.floor((ev.pageY - domrect.y) / rowheight) - item.y;
+
+    let mode = ( gridx % columnwidth <= resizemargin || gridx % columnwidth >= columnwidth - resizemargin
+        || gridy % rowheight <= resizemargin || gridy % rowheight >= rowheight - resizemargin ) ? "resize" : "move";
+
+    ev.dataTransfer.setData("text", JSON.stringify({id:id, x: x, y: y, mode: mode }));
     ev.dataTransfer.dropEffect = "none";
     //ev.dataTransfer.setData("text",ev.target.className)
 }
 
 function drop(ev) {
     ev.preventDefault();
-    console.log("DRAGGING");
-    let id = ev.dataTransfer.getData("text");
+
+    let data = JSON.parse(ev.dataTransfer.getData("text"));
+    let id = data.id;
     /*
     let x = ev.target.attributes.getNamedItem("data-x").value;
     let y = ev.target.attributes.getNamedItem("data-y").value;
     */
-
+    let item = app.gridlist.find(item => item.id == id);
     let coloums = 12; // TODO: Get these numbers from the actual source
     let rows = 20;
     let domrect = document.getElementById("grid").getBoundingClientRect();
+   // let elementrect = document.getElementById(id).getBoundingClientRect();
 
-    let x = Math.floor(ev.pageX / (domrect.width / coloums)) + 1;
-    let y = Math.floor(ev.pageY / (domrect.height / rows)) + 1;
-    console.log("Mouse Pos",ev.pageX,ev.pageY);
-    let item = app.gridlist.find(item => item.id == id);
+    // Coordinates on the grid
+    let grid_x = Math.floor((ev.pageX - domrect.x) / (domrect.width / coloums));
+    let grid_y = Math.floor((ev.pageY - domrect.y) / (domrect.height / rows));
 
-    if(ev.shiftKey){
-        if(x < item.x){
-            let difference = item.x - x;
-            item.x = x;
-            item.w += difference;
-        }else{
-            item.w = x - item.x + 1;
-        }
-        if(y < item.y){
-            let difference = item.y - y;
-            item.y = y;
-            item.h += difference;
-        }else{
-            item.h = y - item.y + 1;
+    let element_x = data.x;
+    let element_y = data.y;
+
+    console.log(data.mode);
+    if(data.mode === "resize"){
+        if(data.x >= item.w - 1){
+            if(grid_x < element_x.x){
+                item.x = grid_x - data.x + item.w;
+                item.w = item.w - (grid_x - item.x);
+            }else{
+                item.w = grid_x - item.x;
+            }
+
+        }else if(data.y >= item.h - 1){
+            if(grid_y < element_y){
+                item.y = grid_y + item.h;
+                item.h = item.h - (grid_y - item.y);
+            }else{
+                item.h = grid_y - item.y;
+            }
         }
     }else {
-        item.x = x;
-        item.y = y;
+        console.log(item.x, item.y);
+        item.x = grid_x - data.x;
+        item.y = grid_y - data.y;
+        console.log(item.x, item.y);
     }
 
 }
@@ -115,7 +145,7 @@ Vue.component('grid-element', {
     },
     computed: {
         gridarea: function () {
-            return `grid-area: ${this.item.y} / ${this.item.x} / span ${this.item.h} / span ${this.item.w};`;
+            return `grid-area: ${this.item.y + 1} / ${this.item.x + 1} / span ${this.item.h} / span ${this.item.w};`;
         }
         },
 
@@ -130,18 +160,18 @@ var app = new Vue({
         gridlist: [
             {
                 id: 1,
-                x: 2,
-                y: 2,
-                w: 2,
+                x: 1,
+                y: 1,
+                w: 1,
                 h: 1,
                 value: "Navn",
                 type: "label",
             },
             {
                 id: 2,
-                x: 4,
-                y: 2,
-                w: 2,
+                x: 2,
+                y: 1,
+                w: 7,
                 h: 1,
                 value: "navn-input",
                 type: "text",
