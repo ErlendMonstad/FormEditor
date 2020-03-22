@@ -4,15 +4,26 @@ function allowDrop(ev) {
 
 function drag(ev,id) {
     ev.dataTransfer.setData("text", id);
+    ev.dataTransfer.dropEffect = "none";
     //ev.dataTransfer.setData("text",ev.target.className)
 }
 
 function drop(ev) {
     ev.preventDefault();
+    console.log("DRAGGING");
     let id = ev.dataTransfer.getData("text");
+    /*
     let x = ev.target.attributes.getNamedItem("data-x").value;
     let y = ev.target.attributes.getNamedItem("data-y").value;
+    */
 
+    let coloums = 12; // TODO: Get these numbers from the actual source
+    let rows = 20;
+    let domrect = document.getElementById("grid").getBoundingClientRect();
+
+    let x = Math.floor(ev.pageX / (domrect.width / coloums)) + 1;
+    let y = Math.floor(ev.pageY / (domrect.height / rows)) + 1;
+    console.log("Mouse Pos",ev.pageX,ev.pageY);
     let item = app.gridlist.find(item => item.id == id);
 
     if(ev.shiftKey){
@@ -20,10 +31,8 @@ function drop(ev) {
             let difference = item.x - x;
             item.x = x;
             item.w += difference;
-            console.log(item.x,item.w);
         }else{
             item.w = x - item.x + 1;
-            console.log(item.x,item.w);
         }
         if(y < item.y){
             let difference = item.y - y;
@@ -36,6 +45,7 @@ function drop(ev) {
         item.x = x;
         item.y = y;
     }
+
 }
 
 
@@ -50,8 +60,6 @@ function populateGrid(){
         cell.id = newId();
         let x = document.createAttribute("data-x");
         let y = document.createAttribute("data-y");
-        let ondragover = document.createAttribute("ondragover");
-        let ondrop = document.createAttribute("ondrop");
         let style = document.createAttribute("style");
 
 
@@ -61,14 +69,9 @@ function populateGrid(){
         cell.style.gridRowStart = y.value;
 
 
-
-        ondragover.value = 'allowDrop(event)';
-        ondrop.value = 'drop(event)';
-
         cell.attributes.setNamedItem(x);
         cell.attributes.setNamedItem(y);
-        cell.attributes.setNamedItem(ondragover);
-        cell.attributes.setNamedItem(ondrop);
+
 
         document.getElementById("grid").prepend(cell);
     }
@@ -76,8 +79,6 @@ function populateGrid(){
 
 function setSize(id){
     let element = document.getElementById(id);
-    
-
 }
 
 let idcounter = 0;
@@ -86,7 +87,7 @@ function newId(){
     return "id" + idcounter++;
 }
 
-populateGrid();
+//populateGrid();
 
 /*
 Vue.component('text-element', {
@@ -109,7 +110,7 @@ Vue.component('grid-element', {
     props: ['item'],
     data: function () {
         return {
-            ondragstart: `drag(event, ${this.item.id})`
+            ondragstart: `drag(event, ${this.item.id})`,
         }
     },
     computed: {
