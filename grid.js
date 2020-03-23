@@ -21,10 +21,13 @@ function drag(ev,id) {
     let x = Math.floor((ev.pageX - domrect.x) / columnwidth) - item.x;
     let y = Math.floor((ev.pageY - domrect.y) / rowheight) - item.y;
 
+    let islastcolumn = x >= item.w - 1;
+    let islastrow = y >= item.h - 1;
+
     let mode = ( gridx % columnwidth <= resizemargin || gridx % columnwidth >= columnwidth - resizemargin
         || gridy % rowheight <= resizemargin || gridy % rowheight >= rowheight - resizemargin ) ? "resize" : "move";
 
-    ev.dataTransfer.setData("text", JSON.stringify({id:id, x: x, y: y, mode: mode }));
+    ev.dataTransfer.setData("text", JSON.stringify({id:id, x: x, y: y, mode: mode, islastrow:islastrow, islastcolumn: islastcolumn }));
     ev.dataTransfer.dropEffect = "none";
     //ev.dataTransfer.setData("text",ev.target.className)
 }
@@ -53,7 +56,7 @@ function drop(ev) {
 
     console.log(data.mode);
     if(data.mode === "resize"){
-        if(data.x >= item.w - 1){
+        if(data.islastcolumn){
             if(grid_x < element_x.x){
                 item.x = grid_x - data.x + item.w;
                 item.w = item.w - (grid_x - item.x);
@@ -61,7 +64,8 @@ function drop(ev) {
                 item.w = grid_x - item.x;
             }
 
-        }else if(data.y >= item.h - 1){
+        }
+        if(data.islastrow){
             if(grid_y < element_y){
                 item.y = grid_y + item.h;
                 item.h = item.h - (grid_y - item.y);
@@ -114,25 +118,6 @@ let idcounter = 0;
 function newId(){
     return "id" + idcounter++;
 }
-
-//populateGrid();
-
-/*
-Vue.component('text-element', {
-    props: ['item'],
-    template: '<input type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
-});
-
-Vue.component('button-element', {
-    props: ['item'],
-    template: '<input type="text" style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
-});
-
-Vue.component('label-element', {
-    props: ['item'],
-    template: '<p style="grid-area: {{item.y}} / {{ grid.x}} / span {{ grid.h}} / grid {{ grid.w}} "/>'
-});
-*/
 
 Vue.component('grid-element', {
     props: ['item'],
