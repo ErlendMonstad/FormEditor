@@ -20,7 +20,10 @@
 
 
 .cell {
-
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
 }
 .hor {
     height: 30%;
@@ -54,6 +57,7 @@ input {
     padding: 0px;
     font-family: 'Open Sans', sans-serif;
 }
+
 
 div {
     border: 1px solid #aaaaaa;

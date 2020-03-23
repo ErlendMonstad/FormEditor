@@ -14,7 +14,7 @@ Vue.component('grid-element', {
         }
     },
 
-    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove">{{item.value}}</p>' +
+    template:   '<div v-if=\'item.type === "label"\' class="cell" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><p>{{item.value}}</p></div>' +
         '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea":ondragstart="ondragstart" :onmousemove="onmousemove"/>' +
         '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"/>'
 });
