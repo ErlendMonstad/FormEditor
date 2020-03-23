@@ -7,6 +7,9 @@
     -webkit-text-fill-color: #FFFFFF;
 }
 
+body {
+    background-color: #1E2226;
+}
 
 #propertywindow {
     display: grid;
@@ -73,5 +76,5 @@ input {
 
 
 div {
-    border: 1px solid #aaaaaa;
+    
 }
