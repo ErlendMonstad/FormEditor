@@ -22,7 +22,9 @@ var app = new Vue({
                 value: "navn-input",
                 type: "text",
             }
-        ]
+        ],
+        dragStorage : {}
+
     }
 });
 

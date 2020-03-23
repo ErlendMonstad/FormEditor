@@ -59,16 +59,16 @@ function drag(event,id) {
     let pD = pointerDirection(item,margin,event.pageX,event.pageY);
     let mode = (pD.direction === "") ? "move" : "resize";
 
+    app.dragStorage ={id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
 
-    event.dataTransfer.setData("text", JSON.stringify({id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection }));
-    event.dataTransfer.dropEffect = "none";
+
     //ev.dataTransfer.setData("text",ev.target.className)
 }
 
 function drop(event) {
     event.preventDefault();
 
-    let data = JSON.parse(event.dataTransfer.getData("text"));
+    let data = app.dragStorage;
     let id = data.id;
     /*
     let x = ev.target.attributes.getNamedItem("data-x").value;
@@ -105,7 +105,7 @@ function drop(event) {
         }else if(data.horDirection === "e"){
             item.w = grid_x - item.x + 1;
         }
-        // Ensure that width and height isn't negative. Might be able to be moved to the component. 
+        // Ensure that width and height isn't negative. Might be able to be moved to the component.
         item.w = Math.max(1,item.w);
         item.h = Math.max(1, item.h);
     }
