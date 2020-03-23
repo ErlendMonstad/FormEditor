@@ -1,8 +1,11 @@
 Vue.component('grid-element', {
-    props: ['item'],
+    props: {
+        item: Object,
+    },
     data: function () {
         return {
             ondragstart: `drag(event, ${this.item.id})`,
+            onmousemove: `setPointer(event,${this.item.id})`
         }
     },
     computed: {
@@ -11,7 +14,7 @@ Vue.component('grid-element', {
         }
     },
 
-    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" :ondragstart="ondragstart">{{item.value}}</p>' +
-        '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea":ondragstart="ondragstart"/>' +
-        '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" :ondragstart="ondragstart"/>'
+    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove">{{item.value}}</p>' +
+        '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea":ondragstart="ondragstart" :onmousemove="onmousemove"/>' +
+        '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"/>'
 });
