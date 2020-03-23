@@ -4,6 +4,37 @@ function allowDrop(ev) {
 
 // TODO: Add pointer change for resizing
 
+
+// Checks if pointer is margin pixels within the edge of cell
+function pointerDirection(id,margin, pageX,pageY){
+    let item = app.gridlist.find(item => item.id == id);
+
+    let coloums = 12; // TODO: Get these numbers from the actual source
+    let rows = 20;
+
+    let domrect = document.getElementById("grid").getBoundingClientRect();
+
+    let gridx = (pageX - domrect.x);
+    let gridy = (pageY - domrect.y);
+
+    let columnwidth = (domrect.width / coloums);
+    let rowheight = (domrect.height / rows);
+
+    let horDirection = (gridx % columnwidth <= margin) ? "w" : ( gridx % columnwidth >= columnwidth - margin) ? "e" : "";
+    let verDirection = (gridy % rowheight <= margin) ? "n" : ( gridy % rowheight >= rowheight - margin) ? "s" : "";
+    let direction = horDirection + verDirection;
+
+}
+
+function setPointer(event, id){
+    let item = app.gridlist.find(item => item.id == id);
+    let pd = pointerDirection(id,5,ev.pageX,ev.pageY);
+    if(pd == ""){
+
+    }
+
+}
+
 function drag(ev,id) {
     let item = app.gridlist.find(item => item.id == id);
     let coloums = 12; // TODO: Get these numbers from the actual source
@@ -24,8 +55,7 @@ function drag(ev,id) {
     let islastcolumn = x >= item.w - 1;
     let islastrow = y >= item.h - 1;
 
-    let mode = ( gridx % columnwidth <= resizemargin || gridx % columnwidth >= columnwidth - resizemargin
-        || gridy % rowheight <= resizemargin || gridy % rowheight >= rowheight - resizemargin ) ? "resize" : "move";
+    let mode = "move";
 
     ev.dataTransfer.setData("text", JSON.stringify({id:id, x: x, y: y, mode: mode, islastrow:islastrow, islastcolumn: islastcolumn }));
     ev.dataTransfer.dropEffect = "none";
@@ -119,20 +149,3 @@ function newId(){
     return "id" + idcounter++;
 }
 
-Vue.component('grid-element', {
-    props: ['item'],
-    data: function () {
-        return {
-            ondragstart: `drag(event, ${this.item.id})`,
-        }
-    },
-    computed: {
-        gridarea: function () {
-            return `grid-area: ${this.item.y + 1} / ${this.item.x + 1} / span ${this.item.h} / span ${this.item.w};`;
-        }
-    },
-
-    template:   '<p v-if=\'item.type === "label"\' :style="gridarea" :ondragstart="ondragstart">{{item.value}}</p>' +
-        '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea":ondragstart="ondragstart"/>' +
-        '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" :ondragstart="ondragstart"/>'
-});
