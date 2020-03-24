@@ -12,7 +12,8 @@ Vue.component('element-list', {
 
     },
 
-    template:   '<div v-if=\'item.type === "label"\' class="cell" :ondragstart="ondragstart" :onmousemove="onmousemove"><p>{{item.value}}</p></div>' +
-        '<input v-else-if=\'item.type === "text"\' :value="item.value" type="text" :style="gridarea":ondragstart="ondragstart" :onmousemove="onmousemove"/>' +
-        '<input v-else-if=\'item.type === "button"\' :value="item.value" type="button" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"/>'
+    template:   '<div v-if=\'item.type === "label"\' class="" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><p>{{item.value}}</p></div>' +
+        '<div v-else-if=\'item.type === "text"\' :ondragstart="ondragstart" :onmousemove="onmousemove" ><input :value="item.value" type="text" /></div>' +
+        '<div v-else-if=\'item.type === "button"\'  :ondragstart="ondragstart" :onmousemove="onmousemove"><input :value="item.value" type="button" /></div>' +
+        '<div v-else-if=\'item.type === "big-label"\' class="cell border" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><h1>{{item.value}}</h1></div>'
 });

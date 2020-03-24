@@ -36,49 +36,53 @@ function setPointer(event,id){
 
 }
 
+
+
 function drag(event,id) {
     let item = app.gridlist.find(item => item.id == id);
 
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
+
+    // Kordinater i relasjon til gridet.
     let gridx = (event.pageX - domrect.x);
     let gridy = (event.pageY - domrect.y);
 
+
+    // Dimensjoner.
     let columnwidth = (domrect.width / app.columns);
     let rowheight = (domrect.height / app.rows);
 
+
+    // Henter ut hvor på elementet man drar.
     let x = Math.floor(gridx / columnwidth) - item.x;
     let y = Math.floor(gridy/ rowheight) - item.y;
 
+    // Henter rettningen på resize cursor.
     let pD = pointerDirection(item,app.marginForResizing,event.pageX,event.pageY);
+    // Ingen rettning betyr move.
     let mode = (pD.direction === "") ? "move" : "resize";
 
+    // Legger innformasjon til app.dragStorage som blir lest når elementet skal flyttes til et nytt sted.
     app.dragStorage ={id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
 
 
     //ev.dataTransfer.setData("text",ev.target.className)
 }
 
+
+
+
 function drop(event) {
     event.preventDefault();
 
     let data = app.dragStorage;
-    let id = data.id;
-    /*
-    let x = ev.target.attributes.getNamedItem("data-x").value;
-    let y = ev.target.attributes.getNamedItem("data-y").value;
-    */
-    let item = app.gridlist.find(item => item.id == id);
-
+    let item = app.gridlist.find(item => item.id == data.id);
     let domrect = document.getElementById("grid").getBoundingClientRect();
-    // let elementrect = document.getElementById(id).getBoundingClientRect();
 
     // Coordinates on the grid
     let grid_x = Math.floor((event.pageX - domrect.x) / (domrect.width / app.columns));
     let grid_y = Math.floor((event.pageY - domrect.y) / (domrect.height / app.rows));
-
-    let element_x = data.x;
-    let element_y = data.y;
 
     if(data.mode === "move"){
         item.x = grid_x - data.x;
