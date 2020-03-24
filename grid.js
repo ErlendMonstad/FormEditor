@@ -8,16 +8,13 @@ function allowDrop(ev) {
 // Checks if pointer is margin pixels within the edge of cell
 function pointerDirection(item,margin, pageX,pageY){
 
-    let coloums = 12; // TODO: Get these numbers from the actual source
-    let rows = 20;
-
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
     let gridx = (pageX - domrect.x);
     let gridy = (pageY - domrect.y);
 
-    let columnwidth = (domrect.width / coloums);
-    let rowheight = (domrect.height / rows);
+    let columnwidth = (domrect.width / app.columns);
+    let rowheight = (domrect.height / app.rows);
 
     let horDirection = (gridx - margin <= item.x * columnwidth) ? "w" : ( gridx + margin >= (item.x + item.w)  * columnwidth) ? "e" : "";
     let verDirection = (gridy - margin <= item.y * rowheight) ? "n" : ( gridy + margin >= (item.y + item.h)  * rowheight) ? "s" : "";
@@ -27,7 +24,7 @@ function pointerDirection(item,margin, pageX,pageY){
 
 function setPointer(event,id){
     let item = app.gridlist.find(item => item.id == id);
-    let pd = pointerDirection(item,5,event.pageX,event.pageY);
+    let pd = pointerDirection(item,app.marginForResizing,event.pageX,event.pageY);
 
     // Temporary
     if(pd.direction === ""){
@@ -41,22 +38,19 @@ function setPointer(event,id){
 
 function drag(event,id) {
     let item = app.gridlist.find(item => item.id == id);
-    let coloums = 12; // TODO: Get these numbers from the actual source
-    let rows = 20;
-    let margin = 5;
 
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
     let gridx = (event.pageX - domrect.x);
     let gridy = (event.pageY - domrect.y);
 
-    let columnwidth = (domrect.width / coloums);
-    let rowheight = (domrect.height / rows);
+    let columnwidth = (domrect.width / app.columns);
+    let rowheight = (domrect.height / app.rows);
 
     let x = Math.floor(gridx / columnwidth) - item.x;
     let y = Math.floor(gridy/ rowheight) - item.y;
 
-    let pD = pointerDirection(item,margin,event.pageX,event.pageY);
+    let pD = pointerDirection(item,app.marginForResizing,event.pageX,event.pageY);
     let mode = (pD.direction === "") ? "move" : "resize";
 
     app.dragStorage ={id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
@@ -75,14 +69,13 @@ function drop(event) {
     let y = ev.target.attributes.getNamedItem("data-y").value;
     */
     let item = app.gridlist.find(item => item.id == id);
-    let coloums = 12; // TODO: Get these numbers from the actual source
-    let rows = 20;
+
     let domrect = document.getElementById("grid").getBoundingClientRect();
     // let elementrect = document.getElementById(id).getBoundingClientRect();
 
     // Coordinates on the grid
-    let grid_x = Math.floor((event.pageX - domrect.x) / (domrect.width / coloums));
-    let grid_y = Math.floor((event.pageY - domrect.y) / (domrect.height / rows));
+    let grid_x = Math.floor((event.pageX - domrect.x) / (domrect.width / app.columns));
+    let grid_y = Math.floor((event.pageY - domrect.y) / (domrect.height / app.rows));
 
     let element_x = data.x;
     let element_y = data.y;

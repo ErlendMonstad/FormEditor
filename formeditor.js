@@ -3,6 +3,9 @@
 var app = new Vue({
     el: '#app',
     data: {
+        columns: 20,
+        rows: 12,
+        marginForResizing: 5,
         gridlist: [
             {
                 id: 1,
