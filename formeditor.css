@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(12, 8.33%);
     grid-template-rows: repeat(20, 32px);
-    border: 0;
     background-color: #36383D;
     -webkit-text-fill-color: #FFFFFF;
 }
@@ -10,6 +9,8 @@
 body {
     background-color: #1E2226;
 }
+
+
 
 #propertywindow {
     display: grid;
@@ -41,7 +42,7 @@ body {
     display: grid;
     width: auto;
     height: 100px;
-    padding: 0px;
+
     border: 1px solid #aaaaaa;
 }
 
@@ -54,27 +55,32 @@ body {
     width: 100%;
     height: 100%;
     background-color: #1E2226;
-    outline: none;
     font-family: 'Open Sans', sans-serif;
 }
 
 #grid p {
     font-size: 12px;
-
-    border: 0;
     vertical-align: middle;
 
 }
 
+#grid h1 {
+    font-size: 16px;
+    vertical-align: middle;
+
+}
+
+#grid .border {
+    border: 1px dotted #aaaaaa;
+}
+
 input {
     padding: 0;
-    background-color: #1E2226;
     border: 0;
-
+    border-radius: 3px;
     font-family: 'Open Sans', sans-serif;
 }
 
-
 div {
-    
+
 }
