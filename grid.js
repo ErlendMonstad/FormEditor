@@ -111,3 +111,9 @@ function drop(event) {
     }
 
 }
+
+function updateElement(event, id, value){
+    console.log(value);
+    let item = app.gridlist.find(item => item.id == id);
+    item.value = value;
+}

@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="formeditor.css">
     <script defer src="grid.js"></script>
     <script defer src="gridelement.js"></script>
+    <script defer src="elementproperties.js"></script>
     <script defer src="formeditor.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -24,6 +26,13 @@
             @dragstart='drag($event, item)'
     ></grid-element>
 </div>
+<div id="propertywindow">
+    <elementproperties
+        v-for="(item) in gridlist" 
+        v-bind:item="item"
+        v-bind:key="item.id"
+    ></elementproperties>
+</div>
 </div>
 
 <div id="bottommenu">
@@ -33,9 +42,6 @@
     <input id="button_tool" type="button" value="CLICK" class="tool" draggable="true" ondragstart="drag(event)" >
     <input id="text_tool" type="text" value="CLICK"  class="tool" draggable="true" ondragstart="drag(event)" >
     --->
-
-</div>
-<div id="propertywindow">
 
 </div>
 </div>
