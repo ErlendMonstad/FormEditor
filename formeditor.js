@@ -23,8 +23,11 @@ var app = new Vue({
                 type: "text",
             }
         ],
-        dragStorage : {}
+        dragStorage : {},
 
+        elementlist : [
+
+        ]
     }
 });
 
