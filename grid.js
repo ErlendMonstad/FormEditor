@@ -73,7 +73,7 @@ function drag(event,id) {
 
 
 
-function drop(event) {
+function dropOnGrid(event) {
     event.preventDefault();
 
     let data = app.dragStorage;

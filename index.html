@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="app">
-    <div id="grid" ondragover="drop(event)" ondrop="allowDrop(event)">
+    <div id="grid" ondragover="dropOnGrid(event)" ondrop="allowDrop(event)">
         <grid-element
                 v-for="(item) in gridlist"
                 v-bind:item="item"
