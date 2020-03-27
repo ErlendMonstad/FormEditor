@@ -51,6 +51,16 @@ var app = new Vue({
                 h: 1,
                 value: "land-input",
                 type: "text",
+            },
+            {
+                id:6,
+                x: 1,
+                y: 5,
+                w: 4,
+                h: 4,
+                items: [{value:"male",label:"Mann"},{value:"famale",label:"Kvinne"}],
+                value: "gender",
+                type: "radio"
             }
         ],
         dragStorage : {},
