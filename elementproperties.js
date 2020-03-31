@@ -2,7 +2,7 @@ Vue.component('elementproperties', {
     props: ['item'],
     data: function() {
         return{
-            message: this.item.value
+            value: this.item.value
         }
     },
     methods: {
@@ -12,7 +12,7 @@ Vue.component('elementproperties', {
     },
     template:
         '<div class="property">' +
-        '<label for="newValue">{{item.id}} {{message}}</label>' +
-        '<input class="newValue" type="text" id="newValue" @keyup="updateValue" v-model="message">' +
+        '<label for="newValue">{{item.id}} {{value}}</label>' +
+        '<input class="newValue" type="text" id="newValue" @keyup="updateValue" v-model="value">' +
         '</div>'
 });
