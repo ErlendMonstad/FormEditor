@@ -23,7 +23,7 @@ var app = new Vue({
                 w: 2,
                 h: 1,
                 value: "sted-input",
-                type: "text",
+                type: "textbox",
             },
             {
                 id: 3,
@@ -32,7 +32,7 @@ var app = new Vue({
                 w: 2,
                 h: 1,
                 value: "Skriv in stedsnavn",
-                type: "big-label",
+                type: "headline",
             },
             {
                 id: 4,
@@ -50,7 +50,7 @@ var app = new Vue({
                 w: 2,
                 h: 1,
                 value: "land-input",
-                type: "text",
+                type: "textbox",
             },
             {
                 id:6,
@@ -60,7 +60,7 @@ var app = new Vue({
                 h: 4,
                 items: [{value:"male",label:"Mann"},{value:"famale",label:"Kvinne"}],
                 value: "gender",
-                type: "radio"
+                type: "radio-button"
             }
         ],
         dragStorage : {},

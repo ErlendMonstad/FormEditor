@@ -75,7 +75,7 @@ function drag(event,id) {
 
 function dropOnGrid(event) {
     event.preventDefault();
-    
+
     let data = app.dragStorage;
 
     if(data.mode === "create"){
@@ -84,11 +84,9 @@ function dropOnGrid(event) {
         data.y = 0;
         data.id = app.tempElement.id;
         data.mode = "move";
-
     }
 
     let item = app.gridlist.find(item => item.id == data.id);
-    console.log(item.x,item.y);
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
     // Coordinates on the grid

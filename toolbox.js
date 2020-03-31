@@ -2,20 +2,33 @@
 
 
 function createNewElement(type){
-    let object = {id:app.gridlist.length + 1, x: 0, y: 0, w:2, h:1, value:"Default", type:type};
+    let object = {id:app.gridlist.length + 1, x: 0, y: 0, w:2, h:1, value:"Default", type:type.toLowerCase()};
     app.tempElement = object;
+    console.log("Created " + type);
     app.dragStorage = {mode:"create"};
 }
 
+
+Vue.component('toolbox-element', {
+    props: {
+        item: Object,
+        type:String,
+    },
+    computed: {
+        ondragstart: function () {
+            return `ondragstart=createNewElement("${this.type}")`;
+        }
+    },
+
+    template:   '<div :ondragstart="ondragstart"><p readonly>{{type}}</p></div>'
+});
 
 Vue.component('toolbox', {
     props: {
         item: Object,
     },
     computed: {
-        ondragstart: function () {
-            return 'ondragstart=createNewElement("label")';
-        }
+
     },
     data: function () {
         return {
@@ -24,11 +37,11 @@ Vue.component('toolbox', {
                     { name: "Headline" },
                     { name: "Label" },
                     { name: "Textbox"},
-                    { name: "Radiobutton"}
+                    { name: "Radio-button"}
                 ]
             }
         }
     },
 
-    template:   '<div><h4>Elements</h4><div class="tool"  v-for="item in treeData.children" :key="item.name" draggable="true" :ondragstart="ondragstart"><p readonly>{{item.name}}</p></div></div>'
+    template:   '<div><h4>Elements</h4><toolbox-element class="tool" v-for="item in treeData.children" :key="item.name" draggable="true" v-bind:type="item.name"></toolbox-element></div>'
 });
