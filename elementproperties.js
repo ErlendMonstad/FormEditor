@@ -1,3 +1,9 @@
+function updateElement(event, id, value){
+    console.log(value);
+    let item = app.gridlist.find(item => item.id == id);
+    item.value = value;
+}
+
 Vue.component('elementproperties', {
     props: ['item'],
     data: function() {
@@ -7,7 +13,7 @@ Vue.component('elementproperties', {
     },
     methods: {
         updateValue() {
-            updateElement(event, this.item.id, this.message)
+            updateElement(event, this.item.id, this.value)
         }
     },
     template:
