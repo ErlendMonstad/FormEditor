@@ -13,7 +13,7 @@ Vue.component('elementproperties', {
     },
     template:
         '<div class="property">' +
-        '<label for="newValue">{{item.id}} {{this.value}}</label>' +
+        '<label for="newValue">{{item.id}} {{item.value}}</label>' +
         '<input class="newValue" type="text" id="newValue" v-model="item.value">' +
         '</div>'
 });
