@@ -17,6 +17,14 @@
 </head>
 <body>
 <div id="app">
+    <div id="propertywindow">
+        <p>Element Properties</p>
+        <elementproperties
+                v-for="(item) in gridlist"
+                v-bind:item="item"
+                v-bind:key="item.id"
+        ></elementproperties>
+    </div>
     <div id="grid" ondragover="dropOnGrid(event)" ondrop="allowDrop(event)">
         <grid-element
                 v-for="(item) in gridlist"
@@ -27,24 +35,8 @@
                 @dragstart='drag($event, item)'
         ></grid-element>
     </div>
-
-    <div id="bottommenu">
-        <div id="toolbox" ondragover="allowDrop(event)">
-
-            <!---
-            <input id="button_tool" type="button" value="CLICK" class="tool" draggable="true" ondragstart="drag(event)" >
-            <input id="text_tool" type="text" value="CLICK"  class="tool" draggable="true" ondragstart="drag(event)" >
-            --->
-
-        </div>
-        <div id="propertywindow">
-            <p>Element Properties</p>
-            <elementproperties
-                    v-for="(item) in gridlist"
-                    v-bind:item="item"
-                    v-bind:key="item.id"
-            ></elementproperties>
-        </div>
+    <div id="toolbox" ondragover="allowDrop(event)">
+        <p>Elements</p> <!-- temporary-->
     </div>
 </div>
 

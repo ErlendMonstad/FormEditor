@@ -1,16 +1,10 @@
-#grid {
+
+
+
+#app {
     display: grid;
-    grid-template-columns: repeat(12, 8.33%);
-    grid-template-rows: repeat(20, 32px);
-    background-color: #36383D;
-
-}
-
-#grid #radio {
-    height: 100%;
-    width: 100%;
-    display: block;
-
+    grid-template-columns: 250px auto 250px;
+    height: auto;
 }
 
 body {
@@ -19,23 +13,38 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-
-
 #propertywindow {
     display: flow;
     border: 1px solid #aaaaaa;
     background-color: #36383D;
-    grid-column-start: 3;
+    grid-column-start: 1;
 }
 
-#bottommenu {
-    height: auto;
+
+#grid {
     display: grid;
-    grid-template-columns: auto 10% auto;
-    border: 1px solid #aaaaaa;
+    grid-column-start: 2;
+    grid-template-columns: repeat(12, 8.33%);
+    grid-template-rows: repeat(30, 32px);
     background-color: #36383D;
+
 }
 
+#toolbox {
+    display: grid;
+    grid-column-start: 3;
+    width: auto;
+    height: auto;
+    background-color: #36383D;
+    border: 1px solid #aaaaaa;
+}
+
+#grid #radio {
+    height: 100%;
+    width: 100%;
+    display: block;
+
+}
 
 .cell {
     width: 100%;
@@ -49,23 +58,13 @@ body {
 
 }
 
-#toolbox {
-    display: grid;
-    width: auto;
-    height: auto;
 
-    border: 1px solid #aaaaaa;
-}
 
 #toolbox .tool {
-    width:  80px;
+    width:  100%;
 }
 
-#grid input [type="text"] {
-    font-size: 12px;
-    width: 100%;
-    height: 100%;
-}
+
 
 #grid p {
     font-size: 12px;
@@ -89,6 +88,12 @@ input {
     border-radius: 3px;
     font-family: 'Open Sans', sans-serif;
     background-color: #1E2226;
+}
+
+input [type="text"] {
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
 }
 
 div {
