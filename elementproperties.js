@@ -10,8 +10,7 @@ Vue.component('elementproperties', {
     },
     template:
         '<div class="property">' +
-        '<p>{{item.value}}</p>' +
-        '<label for="newValue">Value:</label>' +
-        '<input type="text" id="newValue" @keyup.enter="updateValue" v-model="value">' +
+        '<label for="newValue">{{item.id}} {{item.value}}</label>' +
+        '<input class="newValue" type="text" id="newValue" @keyup.enter="updateValue" v-model="value">' +
         '</div>'
 });

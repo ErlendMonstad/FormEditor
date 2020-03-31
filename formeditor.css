@@ -3,7 +3,7 @@
 
 #app {
     display: grid;
-    grid-template-columns: 250px auto 250px;
+    grid-template-columns: 400px auto 250px;
     height: auto;
 }
 
@@ -20,6 +20,9 @@ body {
     grid-column-start: 1;
 }
 
+.newValue {
+    float: right;
+}
 
 #grid {
     display: grid;
