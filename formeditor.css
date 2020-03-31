@@ -82,7 +82,13 @@ body {
 }
 
 #grid .border {
-    border: 1px dotted #aaaaaa;
+    border: 1px dotted #aaaaaa !important;
+}
+
+.cell input[type=text] {
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
 }
 
 input {
@@ -93,11 +99,7 @@ input {
     background-color: #1E2226;
 }
 
-input [type="text"] {
-    font-size: 12px;
-    width: 100%;
-    height: 100%;
-}
+
 
 div {
 
