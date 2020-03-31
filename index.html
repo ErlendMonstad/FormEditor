@@ -8,7 +8,9 @@
     <script defer src="gridelement.js"></script>
     <script defer src="radiobutton.js"></script>
     <script defer src="elementproperties.js"></script>
+    <script defer src="toolbox.js"></script>
     <script defer src="formeditor.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- development version, includes helpful console warnings -->
@@ -35,9 +37,9 @@
                 @dragstart='drag($event, item)'
         ></grid-element>
     </div>
-    <div id="toolbox" ondragover="allowDrop(event)">
-        <p>Elements</p> <!-- temporary-->
-    </div>
+    <toolbox id="toolbox" ondragover="allowDrop(event)">
+
+    </toolbox>
 </div>
 
 

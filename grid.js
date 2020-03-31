@@ -64,7 +64,7 @@ function drag(event,id) {
     let mode = (pD.direction === "") ? "move" : "resize";
 
     // Legger innformasjon til app.dragStorage som blir lest når elementet skal flyttes til et nytt sted.
-    app.dragStorage ={id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
+    app.dragStorage = {id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
 
 
     //ev.dataTransfer.setData("text",ev.target.className)
@@ -75,9 +75,20 @@ function drag(event,id) {
 
 function dropOnGrid(event) {
     event.preventDefault();
-
+    
     let data = app.dragStorage;
+
+    if(data.mode === "create"){
+        app.gridlist.push(app.tempElement);
+        data.x = 0;
+        data.y = 0;
+        data.id = app.tempElement.id;
+        data.mode = "move";
+
+    }
+
     let item = app.gridlist.find(item => item.id == data.id);
+    console.log(item.x,item.y);
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
     // Coordinates on the grid

@@ -64,6 +64,7 @@ var app = new Vue({
             }
         ],
         dragStorage : {},
+        tempElement: {},
 
         elementlist : [
 
