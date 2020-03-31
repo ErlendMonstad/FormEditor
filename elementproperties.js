@@ -7,17 +7,13 @@ Vue.component('elementproperties', {
     props: ['item'],
     data: function() {
         return{
-            value: this.item.value
         }
     },
     methods: {
-        updateValue() {
-            updateElement(event, this.item.id, this.value)
-        }
     },
     template:
         '<div class="property">' +
-        '<label for="newValue">{{item.id}} {{value}}</label>' +
-        '<input class="newValue" type="text" id="newValue" @keyup="updateValue" v-model="value">' +
+        '<label for="newValue">{{item.id}} {{this.value}}</label>' +
+        '<input class="newValue" type="text" id="newValue" v-model="item.value">' +
         '</div>'
 });
