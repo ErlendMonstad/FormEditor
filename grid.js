@@ -75,7 +75,7 @@ function drag(event,id) {
 
 function dropOnGrid(event) {
     event.preventDefault();
-
+    
     let data = app.dragStorage;
 
     if(data.mode === "create"){
@@ -83,11 +83,12 @@ function dropOnGrid(event) {
         data.x = 0;
         data.y = 0;
         data.id = app.tempElement.id;
-        app.tempElement = {};
         data.mode = "move";
+
     }
 
     let item = app.gridlist.find(item => item.id == data.id);
+    console.log(item.x,item.y);
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
     // Coordinates on the grid
@@ -117,10 +118,4 @@ function dropOnGrid(event) {
         item.h = Math.max(1, item.h);
     }
 
-}
-
-function updateElement(event, id, value){
-    console.log(value);
-    let item = app.gridlist.find(item => item.id == id);
-    item.value = value;
 }
