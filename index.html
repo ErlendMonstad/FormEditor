@@ -34,10 +34,10 @@
                 v-bind:key="item.id"
                 v-bind:draggable="true"
                 v-bind:readonly="true"
-                @dragstart='drag($event, item)'
+
         ></grid-element>
     </div>
-    <toolbox id="toolbox" ondragover="allowDrop(event)">
+    <toolbox id="toolbox">
 
     </toolbox>
 </div>

@@ -83,6 +83,7 @@ function dropOnGrid(event) {
         data.x = 0;
         data.y = 0;
         data.id = app.tempElement.id;
+        app.tempElement = {};
         data.mode = "move";
     }
 
