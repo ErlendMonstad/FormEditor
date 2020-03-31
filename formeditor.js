@@ -58,8 +58,8 @@ var app = new Vue({
                 y: 5,
                 w: 4,
                 h: 4,
-                items: [{value:"male",label:"Mann"},{value:"famale",label:"Kvinne"}],
-                value: "gender",
+                items: [{value:"eu",label:"EU land"},{value:"nonEU",label:"Utenfor EU"}],
+                value: "selection",
                 type: "radio-button"
             }
         ],
