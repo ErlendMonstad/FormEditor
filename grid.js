@@ -88,7 +88,6 @@ function dropOnGrid(event) {
     }
 
     let item = app.gridlist.find(item => item.id == data.id);
-    console.log(item.x,item.y);
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
     // Coordinates on the grid

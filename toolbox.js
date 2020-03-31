@@ -4,9 +4,7 @@
 function createNewElement(event,type){
 
     let object = {id:app.gridlist.length + 1, x: 0, y: 0, w:2, h:1, value:"Default", type:type.toLowerCase()};
-    console.log(app.gridlist.length);
     app.tempElement = object;
-    console.log("Created " + type);
     app.dragStorage = {mode:"create"};
 }
 
