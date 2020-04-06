@@ -38,7 +38,8 @@ Vue.component('toolbox', {
                     { name: "Label" },
                     { name: "Textbox"},
                     { name: "Radio-Button"},
-                    { name: "Dropdown"}
+                    { name: "Dropdown"},
+                    { name: "Checkbox"}
                 ]
             }
         }
