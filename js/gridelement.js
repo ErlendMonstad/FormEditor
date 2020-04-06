@@ -17,6 +17,7 @@ Vue.component('grid-element', {
     template:   '<div v-if=\'item.type === "label"\' class="cell border" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><p>{{item.value}}</p></div>' +
         '<div v-else-if=\'item.type === "textbox"\' class="cell" :style="gridarea":ondragstart="ondragstart" :onmousemove="onmousemove" ><input :value="item.value" type="text" /></div>' +
         '<div v-else-if=\'item.type === "button"\' :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><input :value="item.value" type="button" /></div>' +
-        '<div v-else-if=\'item.type === "radio-button"\' class="cell border radio" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><radio-element :items="item.items" :value="item.value"></radio-element></div>' +
+        '<div v-else-if=\'item.type === "radio-button"\' class="cell border radio" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><radio-element :value="item.value"></radio-element></div>' +
+        '<div v-else-if=\'item.type === "dropdown"\' class="cell border dropdown" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><dropdown-element :value="item.value"></dropdown-element></div>' +
         '<div v-else-if=\'item.type === "headline"\' class="cell border" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><h1>{{item.value}}</h1></div>'
 });

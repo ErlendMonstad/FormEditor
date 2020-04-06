@@ -36,7 +36,9 @@ Vue.component('toolbox', {
                 children: [
                     { name: "Headline" },
                     { name: "Label" },
-                    { name: "Textbox"}
+                    { name: "Textbox"},
+                    { name: "Radio-Button"},
+                    { name: "Dropdown"}
                 ]
             }
         }

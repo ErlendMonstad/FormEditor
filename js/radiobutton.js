@@ -1,9 +1,4 @@
-class SubElement{
-    constructor(value, label) {
-        this.value= value;
-        this.label = label;
-    }
-}
+
 
 Vue.component('radio-element', {
     props: {
@@ -21,3 +16,6 @@ Vue.component('radio-element', {
 
     template:   '<div class=""><span v-for="item in list" :key="item.value"><input type="radio" :id="item.value" :name="value" :value="item.value"><label :for="item.value">{{item.label}}</label></span></div>'
 });
+
+
+
