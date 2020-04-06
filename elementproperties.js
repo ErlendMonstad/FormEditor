@@ -7,6 +7,7 @@ Vue.component('elementproperties', {
     props: ['item'],
     data: function() {
         return{
+
         }
     },
     methods: {

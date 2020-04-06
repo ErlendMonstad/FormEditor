@@ -58,8 +58,8 @@ var app = new Vue({
                 y: 5,
                 w: 4,
                 h: 4,
-                items: [{value:"eu",label:"EU land"},{value:"nonEU",label:"Utenfor EU"}],
-                value: "selection",
+                //items: [{value:"eu",label:"EU land"},{value:"nonEU",label:"Utenfor EU"}],
+                value: "EU Land, Utenfor EU",
                 type: "radio-button"
             }
         ],
