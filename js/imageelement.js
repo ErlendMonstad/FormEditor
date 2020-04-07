@@ -1,5 +1,5 @@
 
-Vue.component('image-element', {
+Vue.component('image-element-unrestricted', {
     props: {
         value: String
     },
@@ -17,5 +17,33 @@ Vue.component('image-element', {
     },
 
     template: '<img :src="image" alt="Cat">'
+});
+
+
+Vue.component('image-element', {
+    props: {
+        value: String,
+        item: Object
+    },
+    data: function () {
+        return {
+        }
+    },
+    computed: {
+        image: function () {
+            let parameters = this.value.split(",");
+            let size = parameters[0].split("x");
+            let x = size[0];
+            let y = size[1];
+            return `http://placekitten.com/${x}/${y}`;
+        },
+        label: function () {
+            let parameters = this.value.split(",");
+            let label = parameters[1];
+            return label;
+        }
+    },
+
+    template: '<span><img class="imagecontroller" :src="image" alt="Cat"><p>{{label}}</p></span>'
 });
 
