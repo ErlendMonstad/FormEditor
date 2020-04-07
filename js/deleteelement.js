@@ -13,5 +13,5 @@ Vue.component('delete-element', {
         }
     },
 
-    template: '<img v-on:click="deleteItem" id="delete" src="resources/delete.png" alt="delete" style="width:15px;height:15px;">'
+    template: '<img v-on:click="deleteItem" id="delete" src="resources/deleteWhite.png" alt="delete" style="width:15px;height:15px;">'
 });
