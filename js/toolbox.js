@@ -3,11 +3,13 @@
 
 function createNewElement(event,type,id){
     let value = "Default";
+    let minHeight = 1;
     if(type.toLowerCase() === "image"){
         value = "300x300";
+        minHeight = 4;
     }
 
-    let object = {id:id, x: 0, y: 0, w:2, h:1, value:value, type:type.toLowerCase()};
+    let object = {id:id, x: 0, y: 0, w:2, h:minHeight, value:value, minHeight:minHeight, type:type.toLowerCase()};
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
 }
