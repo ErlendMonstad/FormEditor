@@ -3,7 +3,7 @@
 
 #app {
     display: grid;
-    grid-template-columns: 400px auto 250px;
+    grid-template-columns: 375px auto 150px;
     height: auto;
 }
 
@@ -89,6 +89,14 @@ body {
     font-size: 12px;
     width: 100%;
     height: 100%;
+}
+
+#grid img {
+    height: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
 }
 
 select {

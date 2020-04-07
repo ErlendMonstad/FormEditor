@@ -20,5 +20,6 @@ Vue.component('grid-element', {
         '<div v-else-if=\'item.type === "radio-button"\' class="cell border radio" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><radio-element :value="item.value"></radio-element></div>' +
         '<div v-else-if=\'item.type === "dropdown"\' class="cell border dropdown" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><dropdown-element :value="item.value"></dropdown-element></div>' +
         '<div v-else-if=\'item.type === "checkbox"\' class="cell border checkbox" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><checkbox-element :value="item.value"></checkbox-element></div>' +
+        '<div v-else-if=\'item.type === "image"\' class="cell border checkbox" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><image-element :value="item.value"></image-element></div>' +
         '<div v-else-if=\'item.type === "headline"\' class="cell border" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><h1>{{item.value}}</h1></div>'
 });

@@ -1,11 +1,20 @@
 
 
 
-function createNewElement(event,type){
+function createNewElement(event,type,id){
+    let value = "Default";
+    if(type.toLowerCase() === "image"){
+        value = "300x300";
+    }
 
-    let object = {id:app.gridlist.length + 1, x: 0, y: 0, w:2, h:1, value:"Default", type:type.toLowerCase()};
+    let object = {id:id, x: 0, y: 0, w:2, h:1, value:value, type:type.toLowerCase()};
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
+}
+
+function newID(){
+    app.lastId += 1;
+    return app.lastId;
 }
 
 
@@ -14,9 +23,18 @@ Vue.component('toolbox-element', {
         item: Object,
         type:String,
     },
+    data: function () {
+        return {
+
+        }
+    },
+    methods: {
+
+    }
+    ,
     computed: {
         ondragstart: function () {
-            return `createNewElement(event,"${this.type}")`;
+            return `createNewElement(event,"${this.type}",newID())`;
         }
     },
 
@@ -39,9 +57,10 @@ Vue.component('toolbox', {
                     { name: "Textbox"},
                     { name: "Radio-Button"},
                     { name: "Dropdown"},
-                    { name: "Checkbox"}
+                    { name: "Checkbox"},
+                    { name: "Image"}
                 ]
-            }
+            },
         }
     },
 
