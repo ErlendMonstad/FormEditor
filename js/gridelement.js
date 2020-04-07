@@ -4,22 +4,47 @@ Vue.component('grid-element', {
     },
     data: function () {
         return {
-            ondragstart: `drag(event, ${this.item.id})`,
-            onmousemove: `setPointer(event,${this.item.id})`
+
         }
     },
     computed: {
-        gridarea: function () {
-            return `grid-area: ${this.item.y + 1} / ${this.item.x + 1} / span ${this.item.h} / span ${this.item.w};`;
-        }
+
     },
  // TODO: Fiks dette rotet.
-    template:   '<div v-if=\'item.type === "label"\' class="cell border" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><p>{{item.value}}</p></div>' +
-        '<div v-else-if=\'item.type === "textbox"\' class="cell" :style="gridarea":ondragstart="ondragstart" :onmousemove="onmousemove" ><input :value="item.value" type="text" /></div>' +
-        '<div v-else-if=\'item.type === "button"\' :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><input :value="item.value" type="button" /></div>' +
-        '<div v-else-if=\'item.type === "radio-button"\' class="cell border radio" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><radio-element :value="item.value"></radio-element></div>' +
-        '<div v-else-if=\'item.type === "dropdown"\' class="cell border dropdown" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><dropdown-element :value="item.value"></dropdown-element></div>' +
-        '<div v-else-if=\'item.type === "checkbox"\' class="cell border checkbox" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><checkbox-element :value="item.value"></checkbox-element></div>' +
-        '<div v-else-if=\'item.type === "image"\' class="cell border checkbox" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><image-element :value="item.value"></image-element></div>' +
-        '<div v-else-if=\'item.type === "headline"\' class="cell border" :style="gridarea" :ondragstart="ondragstart" :onmousemove="onmousemove"><h1>{{item.value}}</h1></div>'
+    template:   '<div v-if=\'item.type === "label"\' class="border" ><p>{{item.value}}</p></div>' +
+        '<div v-else-if=\'item.type === "textbox"\' ><input :value="item.value" type="text" /></div>' +
+        '<div v-else-if=\'item.type === "button"\' ><input :value="item.value" type="button" /></div>' +
+        '<div v-else-if=\'item.type === "radio-button"\' class="border radio" ><radio-element :value="item.value"></radio-element></div>' +
+        '<div v-else-if=\'item.type === "dropdown"\' class="border dropdown" ><dropdown-element :value="item.value"></dropdown-element></div>' +
+        '<div v-else-if=\'item.type === "checkbox"\' class="border checkbox" ><checkbox-element :value="item.value"></checkbox-element></div>' +
+        '<div v-else-if=\'item.type === "image"\' class="border checkbox" ><image-element :value="item.value"></image-element></div>' +
+        '<div v-else-if=\'item.type === "headline"\' class="border" ><h1>{{item.value}}</h1></div>'
 });
+
+Vue.component('grid', {
+    props: {
+        list: Array,
+    },
+    data: function () {
+        return {
+
+        }
+    },
+    computed: {
+
+    },
+    methods: {
+        ondragstart: function(item){
+            return `drag(event, ${item.id})`;
+        },
+        onmousemove: function(item) {
+            return `setPointer(event, ${item.id})`;
+        }
+    },
+
+    template:   '<div><grid-element v-for="(item) in list" v-bind:item="item" v-bind:key="item.id" v-bind:draggable="true" v-bind:readonly="true"' +
+        ' :ondragstart="ondragstart(item)" :onmousemove="onmousemove(item)" class="cell" ' +
+        `:style="{ 'grid-area' : (item.y + 1) + '/' + (item.x + 1) + '/ span ' + item.h + '/ span ' + item.w }"`  +
+        '></grid-element></div>'
+});
+

@@ -15,7 +15,7 @@
     <script defer src="js/elementproperties.js"></script>
     <script defer src="js/toolbox.js"></script>
     <script defer src="js/formeditor.js"></script>
-    
+
 
 
     <!-- development version, includes helpful console warnings -->
@@ -32,15 +32,7 @@
                 v-bind:key="item.id"
         ></elementproperties>
     </div>
-    <div id="grid" ondragover="dropOnGrid(event)" ondrop="allowDrop(event)">
-        <grid-element
-                v-for="(item) in gridlist"
-                v-bind:item="item"
-                v-bind:key="item.id"
-                v-bind:draggable="true"
-                v-bind:readonly="true"
-        ></grid-element>
-    </div>
+    <grid id="grid" ondragover="dropOnGrid(event)" ondrop="allowDrop(event)" v-bind:list="gridlist"></grid>
     <toolbox id="toolbox">
 
     </toolbox>
