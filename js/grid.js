@@ -113,7 +113,7 @@ function dropOnGrid(event) {
             item.w = grid_x - item.x + 1;
         }
         // Ensure that width and height isn't negative. Might be able to be moved to the component.
-        item.w = Math.max(1,item.w);
+        item.w = Math.max(item.minWidth,item.w);
         item.h = Math.max(item.minHeight, item.h);
     }
 

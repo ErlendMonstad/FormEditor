@@ -2,14 +2,17 @@
 
 
 function createNewElement(event,type,id){
+    //let type = JSON.parse(_type);
     let value = "Default";
-    let minHeight = 1;
-    if(type.toLowerCase() === "image"){
+    console.log(type.minHeight,type.minWidth);
+    let minHeight = (type.minHeight == undefined) ? 1 : type.minHeight;
+    let minWidth = (type.minWidth == undefined) ? 1 : type.minWidth;
+    if(type.name.toLowerCase() === "image"){
         value = "300x300";
-        minHeight = 4;
     }
+    let name = type.name;
 
-    let object = {id:id, x: 0, y: 0, w:2, h:minHeight, value:value, minHeight:minHeight, type:type.toLowerCase()};
+    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight, type:name.toLowerCase()};
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
 }
@@ -23,7 +26,8 @@ function newID(){
 Vue.component('toolbox-element', {
     props: {
         item: Object,
-        type:String,
+        type:Object,
+        name:String
     },
     data: function () {
         return {
@@ -36,11 +40,11 @@ Vue.component('toolbox-element', {
     ,
     computed: {
         ondragstart: function () {
-            return `createNewElement(event,"${this.type}",newID())`;
+            return `createNewElement(event, ${JSON.stringify(this.type)},newID())`;
         }
     },
 
-    template:   '<div :ondragstart="ondragstart"><p readonly>{{type}}</p></div>'
+    template:   '<div :ondragstart="ondragstart"><p readonly>{{name}}</p></div>'
 });
 
 Vue.component('toolbox', {
@@ -60,11 +64,11 @@ Vue.component('toolbox', {
                     { name: "Radio-Button"},
                     { name: "Dropdown"},
                     { name: "Checkbox"},
-                    { name: "Image"}
+                    { name: "Image", minHeight: 4, minWidth: 4}
                 ]
             },
         }
     },
 
-    template:   '<div><h4>Elements</h4><toolbox-element class="tool" v-for="item in treeData.children" :key="item.name" draggable="true" v-bind:type="item.name"></toolbox-element></div>'
+    template:   '<div><h4>Elements</h4><toolbox-element class="tool" v-for="item in treeData.children" :key="item.name" draggable="true" v-bind:type="item" :name="item.name"></toolbox-element></div>'
 });
