@@ -114,7 +114,15 @@ input {
     background-color: #1E2226;
 }
 
-
+/*#delete {
+    cursor: pointer;
+    display: block;
+    float: right;  
+    z-index: 3;
+    position: absolute; 
+    right: 5px; 
+    top: 5px;
+}*/
 
 div {
 
