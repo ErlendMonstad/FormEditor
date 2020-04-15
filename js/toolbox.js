@@ -44,7 +44,7 @@ Vue.component('toolbox-element', {
         }
     },
 
-    template:   '<div :ondragstart="ondragstart"><p readonly>{{name}}</p></div>'
+    template:   '<div class="button-static" :ondragstart="ondragstart"><p readonly>{{name}}</p></div>'
 });
 
 Vue.component('toolbox', {
@@ -70,5 +70,5 @@ Vue.component('toolbox', {
         }
     },
 
-    template:   '<div><h4>Elements</h4><toolbox-element class="tool" v-for="item in treeData.children" :key="item.name" draggable="true" v-bind:type="item" :name="item.name"></toolbox-element></div>'
+    template:   '<div><h4>Elements</h4><toolbox-element class="tool button-static" v-for="item in treeData.children" :key="item.name" draggable="true" v-bind:type="item" :name="item.name"></toolbox-element></div>'
 });
