@@ -7,12 +7,15 @@ function createNewElement(event,type,id){
     console.log(type.minHeight,type.minWidth);
     let minHeight = (type.minHeight == undefined) ? 1 : type.minHeight;
     let minWidth = (type.minWidth == undefined) ? 1 : type.minWidth;
-    if(type.name.toLowerCase() === "image"){
+
+
+    if(type.name.toLowerCase() === "image" || type.name.toLowerCase() === "image without label"){
         value = "300x300";
     }
     let name = type.name;
 
-    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight, type:name.toLowerCase()};
+    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight,
+        type:name.toLowerCase().replace(new RegExp(" ","g"),"")};
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
 }
@@ -64,7 +67,8 @@ Vue.component('toolbox', {
                     { name: "Radio-Button"},
                     { name: "Dropdown"},
                     { name: "Checkbox"},
-                    { name: "Image", minHeight: 4, minWidth: 4}
+                    { name: "Image", minHeight: 4, minWidth: 4},
+                    { name: "Image without label", minHeight: 4, maxWidth:2}
                 ]
             },
         }
