@@ -12,7 +12,15 @@ background-color: #595C5F;
 background-color: #6078EA;
 }
 
+.button-primary:hover {
+    background-color: #4F6BE8;
+}
+
 .button-danger {
     padding: 2px;
     background-color: #F75B5E;  
+}
+
+.button-danger:hover {
+    background-color: #FC474A;
 }

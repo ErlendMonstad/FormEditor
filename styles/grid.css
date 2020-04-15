@@ -1,16 +1,14 @@
 
-
 #grid p {
     font-size: 12px;
     vertical-align: middle;
-    border: 1px solid darkred;
+   /* border: 1px solid darkred; */
 
 }
 
 #grid h1 {
     font-size: 16px;
     vertical-align: middle;
-
 }
 
 #grid .border {
@@ -24,6 +22,7 @@
     margin-right: 10px;
     object-fit: contain;
     float: left;
+    border: 1px dotted white;
 }
 
 #grid {
