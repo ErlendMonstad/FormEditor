@@ -27,7 +27,7 @@ body {
     grid-column-start: 3;
     width: auto;
     height: auto;
-    padding:10px;
+    overflow: hidden;
     background-color: #36383D;
     border: 1px solid #aaaaaa;
 }
@@ -41,6 +41,8 @@ body {
 
 #toolbox .tool {
     width:  100%;
+  
+    margin-bottom: 5px;
 }
 
 
