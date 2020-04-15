@@ -3,6 +3,7 @@
 
 #app {
     display: grid;
+    width: min(1325px, 100%);
     grid-template-columns: 375px auto 150px;
     height: auto;
 }
@@ -67,7 +68,7 @@ body {
 #grid p {
     font-size: 12px;
     vertical-align: middle;
-    border: 1px solid darkred;
+   /* border: 1px solid darkred; */
 
 }
 
@@ -98,6 +99,7 @@ body {
     margin-right: 10px;
     object-fit: contain;
     float: left;
+    border: 1px dotted white;
 }
 
 select {

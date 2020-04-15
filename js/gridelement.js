@@ -1,3 +1,10 @@
+
+function copyElement (event,item) {
+    console.log("COPY2",item);
+    event.clipboardData.setData("text",JSON.stringify(item));
+    event.preventDefault();
+}
+
 Vue.component('grid-element', {
     props: {
         item: Object,
@@ -18,6 +25,7 @@ Vue.component('grid-element', {
         '<div v-else-if=\'item.type === "dropdown"\' class="border dropdown" ><dropdown-element :value="item.value"></dropdown-element></div>' +
         '<div v-else-if=\'item.type === "checkbox"\' class="border checkbox" ><checkbox-element :value="item.value"></checkbox-element></div>' +
         '<div v-else-if=\'item.type === "image"\' class="border checkbox" ><image-element :value="item.value"></image-element></div>' +
+        '<div v-else-if=\'item.type === "imagewithoutlabel"\' class="border checkbox" ><image-element :value="item.value"></image-element></div>' +
         '<div v-else-if=\'item.type === "headline"\' class="border" ><h1>{{item.value}}</h1></div>'
 });
 
@@ -34,6 +42,10 @@ Vue.component('grid', {
 
     },
     methods: {
+        oncopy: function (item) {
+            console.log("COPY");
+            return `copyElement(event,${JSON.stringify(item)})`;
+        },
         ondragstart: function(item){
             return `drag(event, ${item.id})`;
         },
@@ -43,7 +55,7 @@ Vue.component('grid', {
     },
 
     template:   '<div><grid-element v-for="(item) in list" v-bind:item="item" v-bind:key="item.id" v-bind:draggable="true" v-bind:readonly="true"' +
-        ' :ondragstart="ondragstart(item)" :onmousemove="onmousemove(item)" class="cell" ' +
+        ' :ondragstart="ondragstart(item)" :onmousemove="onmousemove(item)" :oncopy="oncopy(item)" class="cell" ' +
         `:style="{ 'grid-area' : (item.y + 1) + '/' + (item.x + 1) + '/ span ' + item.h + '/ span ' + item.w }"`  +
         '></grid-element></div>'
 });

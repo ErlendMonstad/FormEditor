@@ -6,6 +6,7 @@ var app = new Vue({
         columns: 12,
         rows: 30,
         marginForResizing: 5,
+        selectedElement: null,
         gridlist: [
 
         ],
