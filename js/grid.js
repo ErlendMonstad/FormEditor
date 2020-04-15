@@ -24,7 +24,7 @@ function pointerDirection(item,margin, pageX,pageY){
 
 function setPointer(event,id){
     let item = app.gridlist.find(item => item.id == id);
-    let pd = pointerDirection(item,app.marginForResizing,event.pageX,event.pageY);
+    let pd = pointerDirection(item,app.marginForResizing,event.pageX - window.scrollX,event.pageY - window.scrollY);
 
     // Temporary
     if(pd.direction === ""){
