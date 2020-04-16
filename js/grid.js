@@ -132,17 +132,22 @@ function gridLines(){
     canvas.width = gridWidth;
     canvas.height = gridHeight;
 
-    let columnWidth = gridWidth / 12;
-    let columnHeight = gridHeight / 30;
+    //henter antall kolonner og rader
+    let htmlStyles = window.getComputedStyle(document.querySelector("html"));
+    let colNum = parseInt(htmlStyles.getPropertyValue("--colNum"));
+    let rowNum = parseInt(htmlStyles.getPropertyValue("--rowNum"));
 
-    for(i = 1; i < 13; i++){
+    let columnWidth = gridWidth / colNum;
+    let columnHeight = gridHeight / rowNum;
+
+    for(i = 1; i < colNum + 1; i++){
         context.beginPath();
         context.moveTo(columnWidth * i, 0);
         context.lineTo(columnWidth * i, gridHeight);
         context.stroke();
     }
 
-    for(i = 1; i < 31; i++){
+    for(i = 1; i < rowNum + 1; i++){
         context.beginPath();
         context.moveTo(0, columnHeight * i);
         context.lineTo(gridWidth, columnHeight * i);
@@ -153,4 +158,13 @@ function gridLines(){
 function clearCanvas(){
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+//sette antall kolonner fra konsoll
+//buggy etter forandring må fikse
+function setColumn(n){
+    document.documentElement.style.setProperty("--colNum", n);
+
+    let percentage = 100 / n;
+    document.documentElement.style.setProperty("--colWidthPercentage", percentage + "%");
 }

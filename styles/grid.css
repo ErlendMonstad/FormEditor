@@ -1,3 +1,9 @@
+:root {
+    --rowNum: 30;
+    --colNum: 12;
+    --gridHeight: 32px;
+    --colWidthPercentage: 8.33%;
+}
 
 #grid p {
     font-size: 12px;
@@ -28,8 +34,8 @@
 #grid {
     display: grid;
     grid-column-start: 2;
-    grid-template-columns: repeat(12, 8.33%);
-    grid-template-rows: repeat(30, 32px);
+    grid-template-columns: repeat(var(--colNum), var(--colWidthPercentage));
+    grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
     background-color: #36383D;
     position: relative;
 }
