@@ -56,7 +56,7 @@ Vue.component('grid', {
     },
 
     template:   '<div><grid-element v-for="(item) in list" v-bind:item="item" v-bind:key="item.id" v-bind:draggable="true" v-bind:readonly="true"' +
-        ' :ondragstart="ondragstart(item)" ondragend="clearCanvas()" :onmousemove="onmousemove(item)" :oncopy="oncopy(item)" class="cell" ' +
+        ' :ondragstart="ondragstart(item)" ondrop="clearCanvas()" :onmousemove="onmousemove(item)" :oncopy="oncopy(item)" class="cell" ' +
         `:style="{ 'grid-area' : (item.y + 1) + '/' + (item.x + 1) + '/ span ' + item.h + '/ span ' + item.w }"`  +
         '></grid-element></div>'
 });
