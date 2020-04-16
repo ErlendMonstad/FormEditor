@@ -8,6 +8,12 @@
     height: auto;
 }
 
+#canvas {
+    z-index: 20;
+    pointer-events: none;
+    position: absolute;
+}
+
 body {
     background-color: #36393D;
     -webkit-text-fill-color: #FFFFFF;

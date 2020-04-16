@@ -121,3 +121,36 @@ function dropOnGrid(event) {
     item.y = Math.max(0, item.y);
 
 }
+
+//tegner linjer, blir kalt når man dragger elementer
+function gridLines(){
+    let canvas = document.getElementById("canvas");
+    let context = canvas.getContext("2d");
+    let gridWidth = document.getElementById("grid").offsetWidth;
+    let gridHeight = document.getElementById("grid").offsetHeight;
+
+    canvas.width = gridWidth;
+    canvas.height = gridHeight;
+
+    let columnWidth = gridWidth / 12;
+    let columnHeight = gridHeight / 30;
+
+    for(i = 1; i < 13; i++){
+        context.beginPath();
+        context.moveTo(columnWidth * i, 0);
+        context.lineTo(columnWidth * i, gridHeight);
+        context.stroke();
+    }
+
+    for(i = 1; i < 31; i++){
+        context.beginPath();
+        context.moveTo(0, columnHeight * i);
+        context.lineTo(gridWidth, columnHeight * i);
+        context.stroke();
+    }
+}
+
+function clearCanvas(){
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+}

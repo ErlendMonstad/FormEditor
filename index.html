@@ -32,7 +32,10 @@
                 v-bind:key="item.id"
         ></elementproperties>
     </div>
-    <grid id="grid" ondragover="dropOnGrid(event)" ondrop="allowDrop(event)" v-bind:list="gridlist"></grid>
+    <div id="gridcontainer">
+        <canvas id="canvas"></canvas>
+        <grid class="grid" id="grid" ondragover="dropOnGrid(event)" ondrop="allowDrop(event)" v-bind:list="gridlist"></grid>
+    </div>
     <toolbox id="toolbox">
 
     </toolbox>
