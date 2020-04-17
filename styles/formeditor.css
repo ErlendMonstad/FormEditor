@@ -1,11 +1,14 @@
-
-
-
 #app {
     display: grid;
     width: min(1325px, 100%);
     grid-template-columns: 375px auto 150px;
     height: auto;
+}
+
+#canvas {
+    z-index: 20;
+    pointer-events: none;
+    position: absolute;
 }
 
 body {

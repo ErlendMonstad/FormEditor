@@ -14,7 +14,7 @@ Vue.component('elementproperties', {
     },
     template:
         '<div>' +
-        '<label for="newValue">{{item.value}}</label>' +
+        '<label for="newValue">{{item.type}}: {{item.value}}</label>' +
         '<delete-element class="property" v-bind:item="this.item"></delete-element>' +
         '<input class="property" type="text" id="newValue" v-model="item.value">' +
         '</div>'
