@@ -139,20 +139,19 @@ function gridLines(){
 
     let columnWidth = gridWidth / colNum;
     let columnHeight = gridHeight / rowNum;
-
+    
+    context.beginPath();
     for(i = 1; i < colNum + 1; i++){
-        context.beginPath();
         context.moveTo(columnWidth * i, 0);
         context.lineTo(columnWidth * i, gridHeight);
-        context.stroke();
+        
     }
-
     for(i = 1; i < rowNum + 1; i++){
-        context.beginPath();
         context.moveTo(0, columnHeight * i);
         context.lineTo(gridWidth, columnHeight * i);
-        context.stroke();
     }
+    context.closePath();
+    context.stroke();
 }
 
 function clearCanvas(){

@@ -15,7 +15,7 @@ Vue.component('elementproperties', {
     template:
         '<div>' +
         '<label for="newValue">{{item.type}}: {{item.value}}</label>' +
-        '<delete-element class="property" v-bind:item="this.item"></delete-element>' +
-        '<input class="property" type="text" id="newValue" v-model="item.value">' +
+        '<delete-element class="property" v-bind:item="this.item" onclick="clearCanvas()"></delete-element>' +
+        '<input class="property" type="text" id="newValue" v-model="item.value" onkeyup="clearCanvas()">' +
         '</div>'
 });

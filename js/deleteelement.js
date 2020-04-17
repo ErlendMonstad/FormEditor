@@ -8,6 +8,7 @@ Vue.component('delete-element', {
     },
     methods: {
         deleteItem: function () {
+            clearCanvas();
             let index = app.gridlist.indexOf(this.item);
             if (index !== -1) app.gridlist.splice(index, 1);
         }
