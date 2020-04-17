@@ -59,7 +59,7 @@ function drag(event,id) {
     let y = Math.floor(gridy/ rowheight) - item.y;
 
     // Henter rettningen på resize cursor.
-    let pD = pointerDirection(item,app.marginForResizing,event.pageX,event.pageY);
+    let pD = pointerDirection(item,app.marginForResizing,event.pageX  - window.scrollX,event.pageY  - window.scrollY);
     // Ingen rettning betyr move.
     let mode = (pD.direction === "") ? "move" : "resize";
 

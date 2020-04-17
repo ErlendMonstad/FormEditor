@@ -11,6 +11,10 @@
     vertical-align: middle;
 }
 
+#grid div {
+    font-size: 12px;
+}
+
 #grid .border {
     border: 1px dotted #aaaaaa !important;
 }
@@ -31,7 +35,7 @@
     grid-template-columns: repeat(12, 8.33%);
     grid-template-rows: repeat(30, 32px);
     background-color: #36383D;
-
+    column-gap: 2px;
 }
 
 #grid #radio {
