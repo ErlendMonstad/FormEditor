@@ -142,9 +142,8 @@ function gridLines(){
     
     context.beginPath();
     for(i = 1; i < colNum + 1; i++){
-        context.moveTo(columnWidth * i, 0);
-        context.lineTo(columnWidth * i, gridHeight);
-        
+        context.moveTo((columnWidth * i) + (2 * (i-1)) + 1, 0);
+        context.lineTo((columnWidth * i) + (2 * (i-1)) + 1, gridHeight);
     }
     for(i = 1; i < rowNum + 1; i++){
         context.moveTo(0, columnHeight * i);
@@ -167,3 +166,8 @@ function setColumn(n){
     let percentage = 100 / n;
     document.documentElement.style.setProperty("--colWidthPercentage", percentage + "%");
 }
+
+document.addEventListener("dragstart", function( event ) {
+    let img = new Image();
+    event.dataTransfer.setDragImage(img, 0, 0);
+}, false);
