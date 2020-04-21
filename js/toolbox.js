@@ -14,7 +14,7 @@ function createNewElement(event,type,id){
     }
     let name = type.name;
 
-    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight,
+    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight, selected:false,
         type:name.toLowerCase().replace(new RegExp(" ","g"),"")};
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
