@@ -15,7 +15,5 @@ Vue.component('checkbox-element', {
     },
 
     template:   '<span><input type="checkbox" :id="value" :name="value" :value="value" readonly><label :for="value">{{value}}</label></span>'
+
 });
-
-
-

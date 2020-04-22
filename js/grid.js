@@ -39,6 +39,7 @@ function setPointer(event,id){
 
 
 function drag(event,id) {
+    gridLines();
     let item = app.gridlist.find(item => item.id == id);
 
     let domrect = document.getElementById("grid").getBoundingClientRect();
