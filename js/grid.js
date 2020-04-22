@@ -5,25 +5,46 @@ function allowDrop(ev) {
 // TODO: Add pointer change for resizing
 
 
+function getItem(id) {
+    return app.gridlist.find(item => item.id == id);
+}
+
+function getDomRect (){
+    let domrect = document.getElementById("grid").getBoundingClientRect();
+    return domrect;
+}
+
+function dimensions(){
+    let domrect = getDomRect ();
+    return { cWidth : (domrect.width / app.columns), rHeight:(domrect.height / app.rows) };
+}
+
+function gridCoords(event){
+    let domrect = getDomRect ();
+    let gridx = (event.pageX - domrect.x);
+    let gridy = (event.pageY - domrect.y);
+    return { x: gridx, y:gridy };
+}
+
+function cellCoord(event) {
+    let domrect = getDomRect ();
+    let grid_x = Math.floor((event.pageX - domrect.x) / (domrect.width / app.columns));
+    let grid_y = Math.floor((event.pageY - domrect.y) / (domrect.height / app.rows));
+    return {x: grid_x, y:grid_y};
+
+}
+
 // Checks if pointer is margin pixels within the edge of cell
 function pointerDirection(item,margin, pageX,pageY){
 
-    let domrect = document.getElementById("grid").getBoundingClientRect();
-
-    let gridx = (pageX - domrect.x);
-    let gridy = (pageY - domrect.y);
-
-    let columnwidth = (domrect.width / app.columns);
-    let rowheight = (domrect.height / app.rows);
-
-    let horDirection = (gridx - margin <= item.x * columnwidth) ? "w" : ( gridx + margin >= (item.x + item.w)  * columnwidth) ? "e" : "";
-    let verDirection = (gridy - margin <= item.y * rowheight) ? "n" : ( gridy + margin >= (item.y + item.h)  * rowheight) ? "s" : "";
+    let horDirection = (gridCoords(event).x - margin <= item.x * dimensions().cWidth) ? "w" : ( gridCoords(event).x + margin >= (item.x + item.w)  * dimensions().cWidth) ? "e" : "";
+    let verDirection = (gridCoords(event).y - margin <= item.y * dimensions().rHeight) ? "n" : ( gridCoords(event).y + margin >= (item.y + item.h)  * dimensions().rHeight) ? "s" : "";
     let direction =  verDirection + horDirection;
     return {verDirection: verDirection, horDirection: horDirection, direction : direction };
 }
 
 function setPointer(event,id){
-    let item = app.gridlist.find(item => item.id == id);
+    let item = getItem(id);
     let pd = pointerDirection(item,app.marginForResizing,event.pageX - window.scrollX,event.pageY - window.scrollY);
 
     // Temporary
@@ -40,24 +61,18 @@ function setPointer(event,id){
 
 function drag(event,id) {
     gridLines();
-    let item = app.gridlist.find(item => item.id == id);
+    let item = getItem(id);
 
     let domrect = document.getElementById("grid").getBoundingClientRect();
 
-
-    // Kordinater i relasjon til gridet.
-    let gridx = (event.pageX - domrect.x);
-    let gridy = (event.pageY - domrect.y);
-
-
     // Dimensjoner.
-    let columnwidth = (domrect.width / app.columns);
-    let rowheight = (domrect.height / app.rows);
+    let columnwidth = dimensions().cWidth;
+    let rowheight = dimensions().rHeight;
 
 
     // Henter ut hvor på elementet man drar.
-    let x = Math.floor(gridx / columnwidth) - item.x;
-    let y = Math.floor(gridy/ rowheight) - item.y;
+    let x = Math.floor(gridCoords(event).x / columnwidth) - item.x;
+    let y = Math.floor(gridCoords(event).y / rowheight) - item.y;
 
     // Henter rettningen på resize cursor.
     let pD = pointerDirection(item,app.marginForResizing,event.pageX  - window.scrollX,event.pageY  - window.scrollY);
@@ -78,22 +93,19 @@ function dropOnGrid(event) {
     event.preventDefault();
     
     let data = app.dragStorage;
-
     if(data.mode === "create"){
         app.gridlist.push(app.tempElement);
         data.x = 0;
         data.y = 0;
         data.id = app.tempElement.id;
         data.mode = "move";
-
     }
 
     let item = app.gridlist.find(item => item.id == data.id);
-    let domrect = document.getElementById("grid").getBoundingClientRect();
 
     // Coordinates on the grid
-    let grid_x = Math.floor((event.pageX - domrect.x) / (domrect.width / app.columns));
-    let grid_y = Math.floor((event.pageY - domrect.y) / (domrect.height / app.rows));
+    let grid_x = cellCoord(event).x;
+    let grid_y = cellCoord(event).y;
 
     if(data.mode === "move"){
         item.x = grid_x - data.x;
@@ -120,6 +132,8 @@ function dropOnGrid(event) {
     }
     item.x = Math.max(0, item.x);
     item.y = Math.max(0, item.y);
+
+    // TODO: prevent you from setting too high values.
 
 }
 
