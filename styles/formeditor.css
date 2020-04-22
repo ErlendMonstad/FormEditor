@@ -5,6 +5,7 @@
     height: auto;
 }
 
+/*
 label {
     display: inline-block;
     max-width: 200px;
@@ -15,6 +16,8 @@ h1, p, input, label  {
     white-space: nowrap;
     overflow: hidden;
 }
+
+ */
 
 #canvas {
     z-index: 20;
