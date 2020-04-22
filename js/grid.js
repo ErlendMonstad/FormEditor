@@ -102,9 +102,10 @@ function dropOnGrid(event) {
     // Coordinates on the grid
     let grid_x = cellCoord(event).x;
     let grid_y = cellCoord(event).y;
-
-    console.log(grid_x,data.offset_x, item.x);
-
+    console.log("GRID X",grid_x);
+    console.log("OFFSET X",data.offset_x)
+    console.log("ITEM X", item.x)
+    
     // Koordinater for move. 
     let new_x = grid_x - data.offset_x;
     let new_y = grid_y - data.offset_y;

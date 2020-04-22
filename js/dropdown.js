@@ -12,5 +12,5 @@ Vue.component('dropdown-element', {
         }
     },
 
-    template:   '<select><option v-for="item in list" :key="item.value">{{item.label}}</option></select>'
+    template:   '<select><option v-for="item in list" @click="" :key="item.value">{{item.label}}</option></select>'
 });
