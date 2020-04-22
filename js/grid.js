@@ -35,7 +35,7 @@ function cellCoord(event) {
 }
 
 // Checks if pointer is margin pixels within the edge of cell
-function pointerDirection(item,margin, pageX,pageY){
+function pointerDirectionFull(item,margin,event){
 
     let horDirection = (gridCoords(event).x - margin <= item.x * dimensions().cWidth) ? "w" : ( gridCoords(event).x + margin >= (item.x + item.w)  * dimensions().cWidth) ? "e" : "";
     let verDirection = (gridCoords(event).y - margin <= item.y * dimensions().rHeight) ? "n" : ( gridCoords(event).y + margin >= (item.y + item.h)  * dimensions().rHeight) ? "s" : "";
@@ -43,15 +43,19 @@ function pointerDirection(item,margin, pageX,pageY){
     return {verDirection: verDirection, horDirection: horDirection, direction : direction };
 }
 
+function pointerDirection(item,event) {
+    return pointerDirectionFull(item,app.marginForResizing,event);
+}
+
 function setPointer(event,id){
     let item = getItem(id);
-    let pd = pointerDirection(item,app.marginForResizing,event.pageX - window.scrollX,event.pageY - window.scrollY);
+    let pD = pointerDirection(item,event);
 
     // Temporary
-    if(pd.direction === ""){
+    if(pD.direction === ""){
         event.target.style.cursor = "default"
     }else{
-        let pointerType = pd.direction + "-resize";
+        let pointerType = pD.direction + "-resize";
         event.target.style.cursor = pointerType;
     }
 
@@ -63,24 +67,16 @@ function drag(event,id) {
     gridLines();
     let item = getItem(id);
 
-    let domrect = document.getElementById("grid").getBoundingClientRect();
-
-    // Dimensjoner.
-    let columnwidth = dimensions().cWidth;
-    let rowheight = dimensions().rHeight;
-
-
-    // Henter ut hvor på elementet man drar.
-    let x = Math.floor(gridCoords(event).x / columnwidth) - item.x;
-    let y = Math.floor(gridCoords(event).y / rowheight) - item.y;
+    let offset_x = cellCoord(event).x - item.x;
+    let offset_y = cellCoord(event).y - item.y;
 
     // Henter rettningen på resize cursor.
-    let pD = pointerDirection(item,app.marginForResizing,event.pageX  - window.scrollX,event.pageY  - window.scrollY);
+    let pD = pointerDirection(item,event);
     // Ingen rettning betyr move.
     let mode = (pD.direction === "") ? "move" : "resize";
 
     // Legger innformasjon til app.dragStorage som blir lest når elementet skal flyttes til et nytt sted.
-    app.dragStorage = {id:id, x: x, y: y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
+    app.dragStorage = {id:id, offset_x: offset_x, offset_y: offset_y, mode: mode, verDirection: pD.verDirection, horDirection:pD.horDirection };
 
 
     //ev.dataTransfer.setData("text",ev.target.className)
@@ -95,8 +91,8 @@ function dropOnGrid(event) {
     let data = app.dragStorage;
     if(data.mode === "create"){
         app.gridlist.push(app.tempElement);
-        data.x = 0;
-        data.y = 0;
+        data.offset_x = 0;
+        data.offset_y = 0;
         data.id = app.tempElement.id;
         data.mode = "move";
     }
@@ -107,9 +103,15 @@ function dropOnGrid(event) {
     let grid_x = cellCoord(event).x;
     let grid_y = cellCoord(event).y;
 
+    console.log(grid_x,data.offset_x, item.x);
+
+    // Koordinater for move. 
+    let new_x = grid_x - data.offset_x;
+    let new_y = grid_y - data.offset_y;
+
     if(data.mode === "move"){
-        item.x = grid_x - data.x;
-        item.y = grid_y - data.y;
+        item.x = new_x;
+        item.y = new_y;
     }else if(data.mode === "resize"){
         if(data.verDirection === "n"){
             item.h += (data.y + item.y) - grid_y;
@@ -128,7 +130,6 @@ function dropOnGrid(event) {
         // Ensure that width and height isn't negative. Might be able to be moved to the component.
         item.w = Math.max(item.minWidth,item.w);
         item.h = Math.max(item.minHeight, item.h);
-
     }
     item.x = Math.max(0, item.x);
     item.y = Math.max(0, item.y);

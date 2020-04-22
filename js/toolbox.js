@@ -2,6 +2,7 @@
 
 
 function createNewElement(event,type,id){
+
     //let type = JSON.parse(_type);
     let value = "Default";
     console.log(type.minHeight,type.minWidth);
