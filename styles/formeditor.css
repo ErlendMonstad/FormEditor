@@ -5,6 +5,17 @@
     height: auto;
 }
 
+label {
+    display: inline-block;
+    max-width: 200px;
+}
+
+h1, p, input, label  {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 #canvas {
     z-index: 20;
     pointer-events: none;
