@@ -32,10 +32,12 @@ body {
 
 #propertywindow {
     display: flow;
+    padding:10px;
     border: 1px solid #aaaaaa;
     background-color: #36383D;
     grid-column-start: 1;
 }
+
 
 
 #toolbox {
@@ -74,9 +76,13 @@ body {
 }
 
 .label {
-
+padding: 0 10px;
+max-width: 40%;
 }
-
+ .headline {
+     text-align: center;
+     font-size:20px;
+ }
 select {
     font-size: 12px;
     width: 100%;
@@ -93,6 +99,11 @@ input {
     background-color: #1E2226;
 }
 
+.element-property{
+    padding:5px 0;
+}
+
 .property {
     float: right;
+    max-width: 40%;
 }
