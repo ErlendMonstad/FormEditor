@@ -61,11 +61,15 @@ Vue.component('grid', {
             return `setPointer(event, ${item.id})`;
         },
         clearAndSetSelected: function(item){
+            /*
             for(let i = 0; i < app.gridlist.length, i++;){
                 app.gridlist[i].selected = false;
             }
             item.selected = true;
+            
+             */
         }
+
     },
 
     template:   '<div><grid-element v-for="(item) in list" v-bind:item="item" v-bind:key="item.id" v-bind:draggable="true" v-bind:readonly="true"' +
