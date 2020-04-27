@@ -5,6 +5,7 @@ var app = new Vue({
     data: {
         columns: 12,
         rows: 30,
+        cellHeight: 32,
         marginForResizing: 5,
         selectedElement: null,
         verticalGutter: 2,

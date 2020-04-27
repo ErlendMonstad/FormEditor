@@ -37,13 +37,18 @@
 
 #grid {
     display: grid;
-    min-width: calc(var(--colNum) * 80px);
+    min-width: calc(var(--colNum) * 53px);
     grid-column-start: 2;
     grid-template-columns: repeat(var(--colNum), var(--colWidthPercentage));
     grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
     background-color: #36383D;
     column-gap: 2px;
     position: relative;
+}
+
+.smallgrid {
+    display: grid;
+    grid-template-columns: 100%;
 }
 
 #grid #radio {
