@@ -5,6 +5,29 @@ function copyElement (event,item) {
     event.preventDefault();
 }
 
+
+Vue.component('text-input', {
+    props: {
+        item: Object,
+    },
+    data: function () {
+        return {
+
+        }
+    },
+    computed: {
+        hasLabel : function () {
+            return this.item.hasOwnProperty("label") && this.item.label.length > 0;
+        },
+        renderLabel: function () {
+            return this.hasLabel && this.item.h > 1;
+        }
+
+    },
+    // TODO: Fiks dette rotet.
+    template: '<span class="smallgrid"><p v-if="renderLabel">{{item.label}}</p><input readonly :value="item.value" type="text" /></span>'
+});
+
 Vue.component('grid-element', {
     props: {
         item: Object,
@@ -28,7 +51,7 @@ Vue.component('grid-element', {
     },
  // TODO: Fiks dette rotet.
     template:   '<div v-if=\'item.type === "label"\' class="border" ><p>{{item.value}}</p></div>' +
-        '<div v-else-if=\'item.type === "textbox"\' ><input readonly :value="item.value" type="text" /></div>' +
+        '<div v-else-if=\'item.type === "textbox"\' ><text-input :item="item"></text-input></div>' +
         '<div v-else-if=\'item.type === "button"\' ><input readonly :value="item.value" type="button" /></div>' +
         '<div v-else-if=\'item.type === "radio-button"\' class="border radio" ><radio-element :value="item.value"></radio-element></div>' +
         '<div v-else-if=\'item.type === "dropdown"\' class="border dropdown" ><dropdown-element :value="item.value"></dropdown-element></div>' +
@@ -66,7 +89,7 @@ Vue.component('grid', {
                 app.gridlist[i].selected = false;
             }
             item.selected = true;
-            
+
              */
         }
 
