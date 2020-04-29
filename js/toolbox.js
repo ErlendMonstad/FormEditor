@@ -1,3 +1,9 @@
+// TODO: Fix it so it is defined once.
+function clearSelected(){
+    for(i = 0; i < app.gridlist.length; i++){
+        app.gridlist[i].selected = false;
+    }
+}
 
 
 
@@ -15,10 +21,15 @@ function createNewElement(event,type,id){
     }
     let name = type.name;
 
-    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight, selected:false, label:"Default",
+
+    clearSelected();
+    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight, selected:true, label:"Default",
         type:name.toLowerCase().replace(new RegExp(" ","g"),"")};
+
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
+
+
 }
 
 function newID(){

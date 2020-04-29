@@ -1,9 +1,19 @@
+// TODO: Fix it so it is defined once.
+function clearAndSetSelected(item){
+    for(i = 0; i < app.gridlist.length; i++){
+        app.gridlist[i].selected = false;
+    }
+    app.gridlist[item - 1].selected = true;
+}
+
 
 function copyElement (event,item) {
     console.log("COPY2",item);
     event.clipboardData.setData("text",JSON.stringify(item));
     event.preventDefault();
 }
+
+
 
 Vue.component('grid-element', {
     props: {
@@ -60,20 +70,15 @@ Vue.component('grid', {
         onmousemove: function(item) {
             return `setPointer(event, ${item.id})`;
         },
-        clearAndSetSelected: function(item){
-            /*
-            for(let i = 0; i < app.gridlist.length, i++;){
-                app.gridlist[i].selected = false;
-            }
-            item.selected = true;
-
-             */
+        onmousedown: function(id){
+            return `clearAndSetSelected(${id})`;
         }
+
 
     },
 
     template:   '<div><grid-element v-for="(item) in list" v-bind:item="item" v-bind:key="item.id" v-bind:draggable="true" v-bind:readonly="true"' +
-        ' :ondragstart="ondragstart(item)" ondrop="clearCanvas()" :onmousedown="clearAndSetSelected(item)" :onmousemove="onmousemove(item)" :oncopy="oncopy(item)" :class="{ cell:true, selectedItem: item.selected}" ' +
+        ' :ondragstart="ondragstart(item)" ondrop="clearCanvas()" :onmousedown="onmousedown(item.id)" :onmousemove="onmousemove(item)" :oncopy="oncopy(item)" :class="{ cell:true, selectedItem: item.selected}" ' +
         `:style="{ 'grid-area' : (item.y + 1) + '/' + (item.x + 1) + '/ span ' + item.h + '/ span ' + item.w }"`  +
         '></grid-element></div>'
 });
