@@ -22,9 +22,12 @@ function createNewElement(event,type,id){
     let name = type.name;
 
 
+    let properties = { value : value, label:"Default"};
+
+
     clearSelected();
-    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, value:value, minWidth:minWidth, minHeight:minHeight, selected:true, label:"Default",
-        type:name.toLowerCase().replace(new RegExp(" ","g"),"")};
+    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, minWidth:minWidth, minHeight:minHeight, selected:true,
+        type:name.toLowerCase().replace(new RegExp(" ","g"),""), props:properties };
 
     app.tempElement = object;
     app.dragStorage = {mode:"create"};

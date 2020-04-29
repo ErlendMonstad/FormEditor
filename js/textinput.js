@@ -33,5 +33,5 @@ Vue.component('text-input', {
         }
     },
     // TODO: Fiks dette rotet.
-    template: '<span class="smallgrid" :style="styleGrid"><p v-if="renderLabel" :style="styleLabel">{{item.label}}</p><div :style="styleInput"><input readonly :value="item.value" type="text" /></div></span>'
+    template: '<span class="smallgrid" :style="styleGrid"><p v-if="renderLabel" :style="styleLabel">{{item.props.label}}</p><div :style="styleInput"><input readonly :value="item.props.value" type="text" /></div></span>'
 });
