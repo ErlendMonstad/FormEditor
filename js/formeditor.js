@@ -9,6 +9,7 @@ var app = new Vue({
         marginForResizing: 5,
         selectedElement: null,
         verticalGutter: 2,
+        horizontalGutter: 5,
         gridlist: [
 
         ],

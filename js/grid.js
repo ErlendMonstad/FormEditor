@@ -14,9 +14,10 @@ function getDomRect (){
     return domrect;
 }
 
+
 function dimensions(){
     let domrect = getDomRect ();
-    return { cWidth : (domrect.width / app.columns), rHeight:(domrect.height / app.rows) };
+    return { cWidth : ((domrect.width + app.horizontalGutter * app.columns) / app.columns), rHeight:(domrect.height / app.rows) };
 }
 
 function gridCoords(event){
@@ -28,7 +29,7 @@ function gridCoords(event){
 
 function cellCoord(event) {
     let domrect = getDomRect ();
-    let grid_x = Math.floor((event.pageX - domrect.x) / (domrect.width / app.columns));
+    let grid_x = Math.floor((event.pageX - domrect.x) / (((domrect.width + (app.horizontalGutter * app.columns)) / app.columns)));
     let grid_y = Math.floor((event.pageY - domrect.y) / (domrect.height / app.rows));
     return {x: grid_x, y:grid_y};
 
@@ -83,7 +84,18 @@ function drag(event,id) {
 }
 
 
+function setPos(item,x,y){
+    item.x = x * 2;
+    item.y = y * 1;
+}
 
+function setHeight(item, h) {
+    item.h = h * 1;
+}
+
+function setWidth(item,w) {
+    item.w = w * 1;
+}
 
 function dropOnGrid(event) {
     event.preventDefault();
@@ -109,22 +121,21 @@ function dropOnGrid(event) {
     let new_y = grid_y - data.offset_y;
 
     if(data.mode === "move"){
-        item.x = new_x;
-        item.y = new_y;
+        setPos(item,new_x,new_y);
     }else if(data.mode === "resize"){
         if(data.verDirection === "n"){
-            item.h += (data.y + item.y) - grid_y;
-            item.y = grid_y;
+            setHeight(item, item.h + (data.y + item.y) - grid_y);
+            setPos(item, item.x / 2,grid_y);
 
         }else if(data.verDirection === "s"){
-            item.h = grid_y - item.y + 1;
+            setHeight(grid_y - item.y + 1);
         }
         if(data.horDirection === "w"){
-            item.w += (data.x + item.x) - grid_x;
-            item.x = grid_x;
+            setWidth(item, item.h + (data.x + item.x) - grid_x);
+            setPos(item, grid_x,item.y / 1);
 
         }else if(data.horDirection === "e"){
-            item.w = grid_x - item.x + 1;
+            setWidth(grid_x - item.x + 1);
         }
         // Ensure that width and height isn't negative. Might be able to be moved to the component.
         item.w = Math.max(item.minWidth,item.w);

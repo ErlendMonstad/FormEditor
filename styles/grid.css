@@ -2,7 +2,8 @@
     --rowNum: 30;
     --colNum: 12;
     --gridHeight: 32px;
-    --colWidthPercentage: 8.33%;
+    --colWidthPercentage: 1fr;
+    --horizontalGutter: 5px;
 }
 
 #grid p {
@@ -39,7 +40,7 @@
     display: grid;
     min-width: calc(var(--colNum) * 53px);
     grid-column-start: 2;
-    grid-template-columns: repeat(var(--colNum), var(--colWidthPercentage));
+    grid-template-columns: repeat(var(--colNum), var(--colWidthPercentage)  var(--horizontalGutter));
     grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
     background-color: #36383D;
     column-gap: 2px;
