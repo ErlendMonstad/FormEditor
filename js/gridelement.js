@@ -68,6 +68,7 @@ Vue.component('grid', {
             return `drag(event, ${item.id})`;
         },
         onmousemove: function(item) {
+            // Ensure only the current element gets triggered.
             return `setPointer(event, ${item.id})`;
         },
         onmousedown: function(id){

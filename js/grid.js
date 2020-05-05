@@ -37,9 +37,11 @@ function cellCoord(event) {
 
 // Checks if pointer is margin pixels within the edge of cell
 function pointerDirectionFull(item,margin,event){
-
-    let horDirection = (gridCoords(event).x - margin <= item.x * dimensions().cWidth) ? "w" : ( gridCoords(event).x + margin >= (item.x + item.w)  * dimensions().cWidth) ? "e" : "";
-    let verDirection = (gridCoords(event).y - margin <= item.y * dimensions().rHeight) ? "n" : ( gridCoords(event).y + margin >= (item.y + item.h)  * dimensions().rHeight) ? "s" : "";
+    // Use DOMRect.
+    let domrect = event.target.getBoundingClientRect();
+    console.log(event.pageX, domrect.x);
+    let horDirection = (event.pageX - margin <= domrect.x) ? "w" : ( event.pageX + margin >= domrect.x + domrect.width ? "e" : "");
+    let verDirection = (event.pageY - margin <= domrect.y) ? "n" : ( event.pageY + margin >= domrect.y + domrect.height ? "s" : "");
     let direction =  verDirection + horDirection;
     return {verDirection: verDirection, horDirection: horDirection, direction : direction };
 }
