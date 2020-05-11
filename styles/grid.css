@@ -4,6 +4,7 @@
     --gridHeight: 32px;
     --colWidthPercentage: 1fr;
     --horizontalGutter: 5px;
+    --verticalGutter: 5px;
 }
 
 #grid p {
@@ -41,7 +42,7 @@
     min-width: calc(var(--colNum) * 53px);
     grid-column-start: 2;
     grid-template-columns: repeat(var(--colNum), var(--colWidthPercentage)  var(--horizontalGutter));
-    grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
+    grid-template-rows: repeat(var(--rowNum), var(--gridHeight) var(--verticalGutter));
     background-color: #36383D;
     column-gap: 2px;
     position: relative;
