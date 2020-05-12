@@ -27,6 +27,16 @@
     border: 1px dotted #aaaaaa;
 }
 
+#grid .box {
+    border: 2px solid white;
+    z-index: 0;
+
+}
+
+#grid .element {
+    z-index: 1;
+}
+
 #grid img {
     height: 128px;
     width: 128px;

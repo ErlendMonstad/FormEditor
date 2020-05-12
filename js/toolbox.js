@@ -14,7 +14,8 @@ function createNewElement(event,type,id){
     console.log(type.minHeight,type.minWidth);
     let minHeight = (type.minHeight == undefined) ? 1 : type.minHeight;
     let minWidth = (type.minWidth == undefined) ? 1 : type.minWidth;
-
+    let offset = (type.offset == undefined) ? 0 : type.offset;
+    let defaultHeight = (type.defaultHeight == undefined) ? 1 : type.defaultHeight;
 
     if(type.name.toLowerCase() === "image" || type.name.toLowerCase() === "image without label"){
         value = "300x300";
@@ -26,8 +27,8 @@ function createNewElement(event,type,id){
 
 
     clearSelected();
-    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:minHeight, minWidth:minWidth, minHeight:minHeight, selected:true,
-        type:name.toLowerCase().replace(new RegExp(" ","g"),""), props:properties };
+    let object = {id:id, x: 0, y: 0, w:Math.max(2,minWidth), h:Math.max(minHeight,defaultHeight), minWidth:minWidth, minHeight:minHeight, selected:true,
+        type:name.toLowerCase().replace(new RegExp(" ","g"),""), props:properties, offset:offset };
 
     app.tempElement = object;
     app.dragStorage = {mode:"create"};
@@ -83,7 +84,8 @@ Vue.component('toolbox', {
                     { name: "Dropdown"},
                     { name: "Checkbox"},
                     { name: "Image", minHeight: 4, minWidth: 4},
-                    { name: "Image without label", minHeight: 4, maxWidth:2}
+                    { name: "Image without label", minHeight: 4, maxWidth:2},
+                    { name: "Box", offset:1, defaultHeight: 2}
                 ]
             },
         }
