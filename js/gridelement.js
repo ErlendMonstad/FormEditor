@@ -8,7 +8,6 @@ function clearAndSetSelected(item){
 
 
 function copyElement (event,item) {
-    console.log("COPY2",item);
     event.clipboardData.setData("text",JSON.stringify(item));
     event.preventDefault();
 }

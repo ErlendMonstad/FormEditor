@@ -38,7 +38,7 @@ function cellCoord(event) {
 // Checks if pointer is margin pixels within the edge of cell
 function pointerDirectionFull(item,margin,event){
     // Use DOMRect.
-    let domrect = event.target.getBoundingClientRect();
+    let domrect = event.currentTarget.getBoundingClientRect();
 
     let horDirection = (event.pageX - margin <= domrect.x) ? "w" : ( event.pageX + margin >= domrect.x + domrect.width ? "e" : "");
     let verDirection = (event.pageY - margin <= domrect.y) ? "n" : ( event.pageY + margin >= domrect.y + domrect.height ? "s" : "");
@@ -51,15 +51,15 @@ function pointerDirection(item,event) {
 }
 
 function setPointer(event,id){
+
     let item = getItem(id);
     let pD = pointerDirection(item,event);
 
-    // Temporary
     if(pD.direction === ""){
-        event.target.style.cursor = "default"
+        event.currentTarget.style.cursor = "default"
     }else{
         let pointerType = pD.direction + "-resize";
-        event.target.style.cursor = pointerType;
+        event.currentTarget.style.cursor = pointerType;
     }
 
 }
