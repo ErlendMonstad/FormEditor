@@ -1,2 +1,2 @@
 # FormEditor
-Form Editor for Vizrt
+Prototype formeditor for Vizrt
